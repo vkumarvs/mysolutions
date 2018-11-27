@@ -1,12 +1,12 @@
 mysolutions
 ===========
 
-This repository is divided into many branches rleated to my learning path:
+This repository is divided into many branches related to my learning path:
 I am a linux developer by core but have worked in windows and MAC environments
-too.  
+too.
 
 1. Nginx
-2. Useful Scripts 
+2. Useful bash scripts
 3. AWS
 4. OpenSource OLTP Pipeline
 5. Python
