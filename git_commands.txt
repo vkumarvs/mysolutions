@@ -25,3 +25,10 @@ rm -rf <file name>
 git add -i
 git commit -m "commit messages"
 git push origin <branch name>
+
+#Create a new branch under master
+git checkout -b python
+
+#Push new changes in your branch to remote repo
+git push origin python
+
