@@ -1,4 +1,27 @@
 #Most commonly used git commnds by me.
+sudo apt-get install git-core
+git pull origin master
+git remote -v
+git diff --cached
+git log --stat --summary
+git branch -d experimental
+git show HEAD^
+git show HEAD^4
+git show HEAD^2
+git show d7d98d813dae357de079b3d2b78d1b54de9644a9
+git difftool 
+git difftool -y -t=meld
+git difftool --help
+git difftool -y -t meld
+git difftool -y -t meld ...
+git config user.name vkumar
+git commit --amend --reset-author
+git reset --hard@{eb4db00c81c8664894e8d3fda34df8c81b16d517}
+git reset --hard 
+git reset --hard HEAD
+git reset --hard HEAD^1
+git log --author=xyz
+git log --patch -- main.cpp
 
 git status
 git checkout <checkout from the working branch>
