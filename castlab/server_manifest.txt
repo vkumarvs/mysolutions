@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Unified Streaming Platform(version=1.7.28) -->
+<smil xmlns="http://www.w3.org/2001/SMIL20/Language">
+  <head>
+    <meta content="elephant.ismc" name="clientManifestRelativePath"/>
+    <meta content="Unified Streaming Platform (USP)" name="creator"/>
+    <meta content="2" name="hds_client_manifest_version"/>
+    <meta content="4" name="hls_client_manifest_version"/>
+  <meta content="playready" name="iss_playout"/>
+		<meta content="sample_aes" name="hls_playout"/>
+		<meta content="false" name="hds_playout"/>
+		<meta content="true" name="mpd_playout"/>
+		<meta content="true" name="mpd_inline_drm"/>
+		<paramGroup id="hls">
+			<meta content=":79A696EEE81A67CAD843259ECC3F9C0B" name="key"/>
+			<meta content="A868DD76C0C130B51DD0252235EE6A97" name="key_iv"/>
+			<meta content="http://192.168.0.120:8080/msd/elephant/content.key" name="license_server_url"/>
+		</paramGroup>
+		<paramGroup id="widevine">
+			<meta content="f810f0041c7a4bd6bed720e9715343b5:6baac902a2d190950ec51978952902cd" name="key"/>
+			<meta content="CAESEPgQ8AQcekvWvtcg6XFTQ7UaCGNhc3RsYWJzIihleUpoYzNObGRFbGtJam9pZG1sa2MyTmhiR1ZmWkdWdGIxOHhNU0o5MgdkZWZhdWx0" name="drm_specific_data"/>
+		</paramGroup>
+	</head>
+  <body>
+    <switch>
+      <audio src="elephant_eng-64k.isma" systemBitrate="64000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data"/>
+        <param name="trackName" value="audio_eng" valueType="data"/>
+        <param name="SamplingRate" value="44100" valueType="data"/>
+        <param name="Channels" value="2" valueType="data"/>
+        <param name="BitsPerSample" value="16" valueType="data"/>
+        <param name="PacketSize" value="4" valueType="data"/>
+        <param name="AudioTag" value="255" valueType="data"/>
+        <param name="FourCC" value="AACL" valueType="data"/>
+        <param name="CodecPrivateData" value="1210" valueType="data"/>
+      </audio>
+      <audio src="elephant_spa-64k.isma" systemBitrate="64000" systemLanguage="spa">
+        <param name="trackID" value="1" valueType="data"/>
+        <param name="trackName" value="audio_spa" valueType="data"/>
+        <param name="SamplingRate" value="44100" valueType="data"/>
+        <param name="Channels" value="2" valueType="data"/>
+        <param name="BitsPerSample" value="16" valueType="data"/>
+        <param name="PacketSize" value="4" valueType="data"/>
+        <param name="AudioTag" value="255" valueType="data"/>
+        <param name="FourCC" value="AACL" valueType="data"/>
+        <param name="CodecPrivateData" value="1210" valueType="data"/>
+      </audio>
+      <textstream src="elephant-en.ismt" systemBitrate="1000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data"/>
+        <param name="trackName" value="textstream_eng" valueType="data"/>
+        <param name="FourCC" value="TTML" valueType="data"/>
+        <param name="Subtype" value="CAPT" valueType="data"/>
+        <param name="CodecPrivateData" value="" valueType="data"/>
+      </textstream>
+      <textstream src="elephant-es.ismt" systemBitrate="1000" systemLanguage="spa">
+        <param name="trackID" value="1" valueType="data"/>
+        <param name="trackName" value="textstream_spa" valueType="data"/>
+        <param name="FourCC" value="TTML" valueType="data"/>
+        <param name="Subtype" value="CAPT" valueType="data"/>
+        <param name="CodecPrivateData" value="" valueType="data"/>
+      </textstream>
+      <video src="elephants380k.ismv" systemBitrate="354000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data"/>
+        <param name="trackName" value="video_eng" valueType="data"/>
+        <param name="MaxWidth" value="384" valueType="data"/>
+        <param name="MaxHeight" value="160" valueType="data"/>
+        <param name="FourCC" value="AVC1" valueType="data"/>
+        <param name="CodecPrivateData" value="000000016742C00DDB06056FFC0050006C40000003004000000C07C50AB80000000168CA8CB2" valueType="data"/>
+      </video>
+      <video src="elephants578k.ismv" systemBitrate="551000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data"/>
+        <param name="trackName" value="video_eng" valueType="data"/>
+        <param name="MaxWidth" value="544" valueType="data"/>
+        <param name="MaxHeight" value="224" valueType="data"/>
+        <param name="FourCC" value="AVC1" valueType="data"/>
+        <param name="CodecPrivateData" value="000000016742C015DB0221DBFF007000991000000300100000030301F162EE0000000168CA8CB2" valueType="data"/>
+      </video>
+      <video src="elephants879k.ismv" systemBitrate="807000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data"/>
+        <param name="trackName" value="video_eng" valueType="data"/>
+        <param name="MaxWidth" value="736" valueType="data"/>
+        <param name="MaxHeight" value="304" valueType="data"/>
+        <param name="FourCC" value="AVC1" valueType="data"/>
+        <param name="CodecPrivateData" value="000000016742C01EDB02E09EFFC0260033C4000003000400000300C07C58BB800000000168CA8CB2" valueType="data"/>
+      </video>
+    </switch>
+  </body>
+</smil>

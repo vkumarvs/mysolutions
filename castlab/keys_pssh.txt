@@ -1,0 +1,1 @@
+{"assets":[{"type":"CENC","assetId":"mytest_demo_11","ingestKeys":[{"keyId":"+BDwBBx6S9a+1yDpcVNDtQ==","streamType":"VIDEO_AUDIO","algorithm":"AES","key":"a6rJAqLRkJUOxRl4lSkCzQ=="}],"overwriteExistingKeys":false}]}

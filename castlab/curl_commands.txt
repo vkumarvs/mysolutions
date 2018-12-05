@@ -1,0 +1,8 @@
+#Register for the CAS ticket
+curl -v POST -d @cas_login.txt -H "Accept: */*" -H "Content-Type: application/x-www-form-urlencoded" https://auth.staging.drmtoday.com/cas/v1/tickets
+
+#Generate the CAS ticket for the URL:
+curl -v POST -d @service_url.txt -H "Accept: */*" -H "Content-Type: application/x-www-form-urlencoded" https://auth.staging.drmtoday.com/cas/v1/tickets/24250de44af97510116f313002e9aef6529f880419e0fc41
+
+#Get the PSSH data for widevine by using CAS ticket
+curl -v -X POST -d @keys_pssh.txt https://fe.staging.drmtoday.com/frontend/api/keys/v2/ingest/mytest?ticket=ST-285f7b0a46fe49cf26e0a1b3454869f6ad7328310fefeba6 -H "Content-Type: application/json" -H 'Accept: application/json' > pssh.txt
