@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Unified Streaming Platform(version=1.7.11) -->
+<smil xmlns="http://www.w3.org/2001/SMIL20/Language">
+  <head>
+    <meta name="clientManifestRelativePath" content="elephant.ismc" />
+    <meta name="creator" content="Unified Streaming Platform (USP)" />
+  </head>
+  <body>
+    <switch>
+      <audio src="1250k_frag_elephants_1_20__minute.ismv" systemBitrate="65000">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="audio" valueType="data" />
+        <param name="SamplingRate" value="48000" valueType="data" />
+        <param name="Channels" value="2" valueType="data" />
+        <param name="BitsPerSample" value="16" valueType="data" />
+        <param name="PacketSize" value="4" valueType="data" />
+        <param name="AudioTag" value="255" valueType="data" />
+        <param name="FourCC" value="AACL" valueType="data" />
+        <param name="CodecPrivateData" value="1190" valueType="data" />
+      </audio>
+      <audio src="1870k_frag_elephants_1_20__minute.ismv" systemBitrate="65000">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="audio" valueType="data" />
+        <param name="SamplingRate" value="48000" valueType="data" />
+        <param name="Channels" value="2" valueType="data" />
+        <param name="BitsPerSample" value="16" valueType="data" />
+        <param name="PacketSize" value="4" valueType="data" />
+        <param name="AudioTag" value="255" valueType="data" />
+        <param name="FourCC" value="AACL" valueType="data" />
+        <param name="CodecPrivateData" value="1190" valueType="data" />
+      </audio>
+      <audio src="230k_frag_elephants_1_20__minute.ismv" systemBitrate="65000">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="audio" valueType="data" />
+        <param name="SamplingRate" value="48000" valueType="data" />
+        <param name="Channels" value="2" valueType="data" />
+        <param name="BitsPerSample" value="16" valueType="data" />
+        <param name="PacketSize" value="4" valueType="data" />
+        <param name="AudioTag" value="255" valueType="data" />
+        <param name="FourCC" value="AACL" valueType="data" />
+        <param name="CodecPrivateData" value="1190" valueType="data" />
+      </audio>
+      <audio src="350k_frag_elephants_1_20__minute.ismv" systemBitrate="65000">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="audio" valueType="data" />
+        <param name="SamplingRate" value="48000" valueType="data" />
+        <param name="Channels" value="2" valueType="data" />
+        <param name="BitsPerSample" value="16" valueType="data" />
+        <param name="PacketSize" value="4" valueType="data" />
+        <param name="AudioTag" value="255" valueType="data" />
+        <param name="FourCC" value="AACL" valueType="data" />
+        <param name="CodecPrivateData" value="1190" valueType="data" />
+      </audio>
+      <audio src="540k_frag_elephants_1_20__minute.ismv" systemBitrate="65000">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="audio" valueType="data" />
+        <param name="SamplingRate" value="48000" valueType="data" />
+        <param name="Channels" value="2" valueType="data" />
+        <param name="BitsPerSample" value="16" valueType="data" />
+        <param name="PacketSize" value="4" valueType="data" />
+        <param name="AudioTag" value="255" valueType="data" />
+        <param name="FourCC" value="AACL" valueType="data" />
+        <param name="CodecPrivateData" value="1190" valueType="data" />
+      </audio>
+      <audio src="810k_frag_elephants_1_20__minute.ismv" systemBitrate="65000">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="audio" valueType="data" />
+        <param name="SamplingRate" value="48000" valueType="data" />
+        <param name="Channels" value="2" valueType="data" />
+        <param name="BitsPerSample" value="16" valueType="data" />
+        <param name="PacketSize" value="4" valueType="data" />
+        <param name="AudioTag" value="255" valueType="data" />
+        <param name="FourCC" value="AACL" valueType="data" />
+        <param name="CodecPrivateData" value="1190" valueType="data" />
+      </audio>
+      <video src="230k_frag_elephants_1_20__minute.ismv" systemBitrate="221000">
+        <param name="trackID" value="2" valueType="data" />
+        <param name="trackName" value="video" valueType="data" />
+        <param name="MaxWidth" value="304" valueType="data" />
+        <param name="MaxHeight" value="128" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C00DDB04C46FFC020002AC40000003004000000C07C50AB80000000168CA8CB2" valueType="data" />
+      </video>
+      <video src="350k_frag_elephants_1_20__minute.ismv" systemBitrate="336000">
+        <param name="trackID" value="2" valueType="data" />
+        <param name="trackName" value="video" valueType="data" />
+        <param name="MaxWidth" value="384" valueType="data" />
+        <param name="MaxHeight" value="160" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C00DDB06056FFC0050006C40000003004000000C07C50AB80000000168CA8CB2" valueType="data" />
+      </video>
+      <video src="540k_frag_elephants_1_20__minute.ismv" systemBitrate="517000">
+        <param name="trackID" value="2" valueType="data" />
+        <param name="trackName" value="video" valueType="data" />
+        <param name="MaxWidth" value="544" valueType="data" />
+        <param name="MaxHeight" value="224" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C015DB0221DBFF007000991000000300100000030301F162EE0000000168CA8CB2" valueType="data" />
+      </video>
+      <video src="810k_frag_elephants_1_20__minute.ismv" systemBitrate="777000">
+        <param name="trackID" value="2" valueType="data" />
+        <param name="trackName" value="video" valueType="data" />
+        <param name="MaxWidth" value="736" valueType="data" />
+        <param name="MaxHeight" value="304" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C01EDB02E09EFFC0260033C4000003000400000300C07C58BB800000000168CA8CB2" valueType="data" />
+      </video>
+      <video src="1250k_frag_elephants_1_20__minute.ismv" systemBitrate="1183000">
+        <param name="trackID" value="2" valueType="data" />
+        <param name="trackName" value="video" valueType="data" />
+        <param name="MaxWidth" value="960" valueType="data" />
+        <param name="MaxHeight" value="400" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C01EDB03C0CEFFC0050006C4000003000400000300C07C58BB800000000168CA8CB2" valueType="data" />
+      </video>
+      <video src="1870k_frag_elephants_1_20__minute.ismv" systemBitrate="1794000">
+        <param name="trackID" value="2" valueType="data" />
+        <param name="trackName" value="video" valueType="data" />
+        <param name="MaxWidth" value="1264" valueType="data" />
+        <param name="MaxHeight" value="528" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C01FDB013C10EFFC02C003B440000003004000000C07C60CB80000000168CA8CB2" valueType="data" />
+      </video>
+    </switch>
+  </body>
+</smil>
