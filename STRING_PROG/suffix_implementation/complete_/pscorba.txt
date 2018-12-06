@@ -1,0 +1,96 @@
+Publish and Subscribe with CORBA Web Events
+by David Houlding
+
+Listing One
+<APPLET CODE="corbabeans.DynamicRequestManagerApplet.class" 
+    NAME="RequestManager" WIDTH="1" HEIGHT="1" MAYSCRIPT>
+<PARAM NAME="useslibrary" VALUE="CORBA Beans">
+<PARAM NAME="useslibrarycodebase" VALUE="CORBABeans.cab">
+<PARAM NAME="useslibraryversion" VALUE="2,4,0,0">
+</APPLET>
+
+Listing Two
+// The manager of all CORBA requests.
+var manager;
+
+// Load publish and subscribe proxies. Could load more ...
+var publisher;
+var subscriber;
+
+function initialize() {
+    // Set up out own error handler.
+    window.onerror = handleError
+    // Get handles to CORBA request manager, load proxies 
+    // and connect to event channel.
+    manager = document.RequestManager;
+    publisher = manager.loadPublisher(
+        "ChatChannel_publish.ser",
+        "publisher",
+        "", // Ignore my publish events.
+        "publisherDisconnectEvent");
+    subscriber = manager.loadSubscriber(
+        "ChatChannel_subscribe.ser",
+        "subscriber",
+        "subscriberPublishEvent",
+        "subscriberDisconnectEvent");
+    connect();
+}
+
+Listing Three
+package corbabeans;
+import java.util.EventListener;
+public interface DynamicEventListener extends EventListener 
+{
+    public void publish(DynamicEvent event);
+    public void disconnect(DynamicEvent event);
+}
+
+Listing Four
+function connect() {
+   publisher.connect();
+   subscriber.connect();
+   window.status = 'Connected';
+}
+
+Listing Five
+function disconnect() {
+   publisher.disconnect();
+   subscriber.disconnect();
+   window.status = 'Disconnected';
+}
+
+Listing Six
+function send() {
+   publisher.publishString( document.ChatForm.NameTextField.value +
+                            ": " +
+                            document.ChatForm.InputTextField.value );
+   document.ChatForm.InputTextField.value = "";
+}
+
+Listing Seven
+function subscriberPublishEvent(event) {
+   document.ChatForm.DialogTextArea.value += 
+      event.getParameter().getValue() + "\n";
+}
+
+Listing Eight
+function subscriberDisconnectEvent(event) {
+    alert( "Disconnected subscriber from event channel. Please re-connect." );
+    window.status = 'Disconnected';
+}
+
+Listing Nine
+function handleError( message, url, lineNumber ) {
+   alert( "An unexpected error occurred:" + message + "\n" +
+          "In JavaScript client loaded from URL: " + url + "\n" +
+          "In JavaScript function at line number: " + lineNumber + "\n" +
+          "Please restart and try again." );
+   return true;
+}
+
+
+
+
+
+
+1

@@ -1,0 +1,80 @@
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+void normalPrint(int **arr, int row, int column)
+{
+    cout<<endl<<"normal print"<<endl;
+    for(int x = 0; x < row; x++)
+    {
+      for(int j = 0; j < column; j++)
+      {
+        cout <<arr[x][j]<<"\t";
+      }
+      cout<<endl;
+    }
+}
+
+void spiralPrint(int **arr, int row, int column)
+{
+    cout<<endl<<"spiral print"<<endl;
+   int numSubMatrix = 0;
+    if(row == column) //it is a square matrix
+    {
+      numSubMatrix = row/2;
+    }
+    else
+    {
+      numSubMatrix = row/2 + 1;
+    }
+    int startRow = 0, endRow = row;
+    int startClm = 0, endColmn = column;
+    for(int i = 0; i < numSubMatrix; i++)
+    {
+      startRow = startRow + 1;
+      endRow = endRow -1;
+      startClm = startClm + 1;
+      endColmn = endColmn - 1;
+
+      /*print down direction*/
+      for(int j = startRow; j < endRow; j++)
+      {
+        if(j = startRow)
+        {
+           for(int k = startClm; k < endColmn; k++)
+             cout<<arr[j][k]<<"\t";
+        }
+        cout<<arr[j][endColmn];
+      }
+
+      /*print up direction*/
+      for(int j = (endRow -1); j >= (startRow -1); j--)
+      {
+        if(j == (endRow-1))
+        {
+          for(int k = (endColmn - 2); k >= startClm; k--)
+             cout<<arr[j][k]<<"\t";
+        }
+        cout<<arr[j][startClm];
+      }
+    }
+}
+
+int main()
+{
+    int row = 4, column = 4;
+    int count = 0;
+    int arr[row][column];
+    for(int x = 0; x < row; x++)
+    {
+      for(int j = 0; j < column; j++)
+      {
+        arr[x][j] = count++ ;
+      }
+    }
+    normalPrint(arr[row][column], row, column);
+    spiralPrint(arr[row][column], row, column);
+
+    return 0;
+}

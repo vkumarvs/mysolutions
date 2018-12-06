@@ -1,0 +1,110 @@
+value of p is(3)
+rem1 (0) rem2 (0)
+encoded imsi byte is(0)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9100 9100
+
+
+********after decoding tfwId(9100*****
+value of p is(3)
+rem1 (0) rem2 (1)
+encoded imsi byte is(16)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9101 9101
+
+
+********after decoding tfwId(9101*****
+value of p is(3)
+rem1 (0) rem2 (2)
+encoded imsi byte is(32)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9102 9102
+
+
+********after decoding tfwId(9102*****
+value of p is(3)
+rem1 (0) rem2 (3)
+encoded imsi byte is(48)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9103 9103
+
+
+********after decoding tfwId(9103*****
+value of p is(3)
+rem1 (0) rem2 (4)
+encoded imsi byte is(64)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9104 9104
+
+
+********after decoding tfwId(9104*****
+value of p is(3)
+rem1 (0) rem2 (5)
+encoded imsi byte is(80)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9105 9105
+
+
+********after decoding tfwId(9105*****
+value of p is(3)
+rem1 (0) rem2 (6)
+encoded imsi byte is(96)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9106 9106
+
+
+********after decoding tfwId(9106*****
+value of p is(3)
+rem1 (0) rem2 (7)
+encoded imsi byte is(112)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9107 9107
+
+
+********after decoding tfwId(9107*****
+value of p is(3)
+rem1 (0) rem2 (8)
+encoded imsi byte is(128)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9108 9108
+
+
+********after decoding tfwId(9108*****
+value of p is(3)
+rem1 (0) rem2 (9)
+encoded imsi byte is(144)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9109 9109
+
+
+********after decoding tfwId(9109*****
+value of p is(3)
+rem1 (1) rem2 (0)
+encoded imsi byte is(1)
+imsi length is(2)
+length is(2) first byte is(25)
+
+IMSI in commonId:9110 9110
+
+
+********after decoding tfwId(9110*****

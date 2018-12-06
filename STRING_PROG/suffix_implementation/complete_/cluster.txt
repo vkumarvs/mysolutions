@@ -1,0 +1,118 @@
+Managing Cluster Computers 
+by Carlo Kopp
+
+
+Listing One
+parameter bandwidthlimit label "Capacity Lower Bound" float select
+     anyof 0.3 1 3 10 30 100 300 1000 3000 default 100 300 1000 3000;
+parameter frequency label "Carrier" float select
+     anyof 1.0 1.4 1.8 2.6 3.15 3.8 4.5 default 1.0 1.4 1.8 2.6 3.15 3.8 4.5;
+parameter weathermodel label "Wx Model" integer select
+     anyof 0 1 2 3 default 0;
+parameter span label "Span" text select
+     anyof "SPAN2" "SPAN1" default "SPAN2";
+parameter dataset label "Dataset" text select
+    anyof "dataset97-20" "dataset97-21" default "dataset97-20" "dataset97-21";
+task nodestart
+    node:execute ln -s /u/work_vol/carlo/SIMULATION/freq-table freq-table
+    node:execute ln -s /u/work_vol/carlo/SIMULATION/isa-table isa-table
+    node:execute ln -s /u/work_vol/carlo/SIMULATION/data-dataset97-20-0 
+                                                         data-dataset97-20-0
+    node:execute ln -s /u/work_vol/carlo/SIMULATION/data-dataset97-21-0
+                                                         data-dataset97-21-0
+    copy root:PLOTS node:.
+    copy root:BLN node:.
+    copy root:aid-dataset* node:.
+    copy root:limit-dataset* node:.
+    copy root:plotlist-dataset* node:.
+    copy root:times-dataset* node:.
+    copy root:title-dataset* node:.
+    copy root:weather-model* node:.
+    copy root:*table node:.
+    copy root:mysim node:.
+    copy root:rcfile.sub node:.
+endtask
+task main
+    node:execute date
+    node:execute echo Executing on os:$OS release:$OSRELEASE machine:$MACHINE
+    root:execute df -k .
+    node:substitute rcfile.sub rcfile
+    node:execute ls -l
+    node:execute ls -l BLN
+    node:execute ls -l PLOTS
+    node:execute cat rcfile
+    node:execute time mysim $dataset rcfile
+    root:execute mkdir PLOTS.$jobname
+    copy node:PLOTS/* root:PLOTS.$jobname
+    copy node:usage.log root:TMP/usage.log.$jobname
+    copy node:links root:TMP/links.$jobname
+    copy node:limits.log root:TMP/limits.log.$jobname
+    copy node:journal* root:TMP/
+    root:execute df -k .
+    copy node:stdout root:TMP/stdout.$jobname
+    node:execute date
+endtask
+
+
+Listing Two
+#      do not execute Clustor jobs 7:30-17:30 Mon-Fri
+#off day Mon-Fri time 7:30-17:30
+#      do not execute Clustor jobs on June 30, 1998
+#off date 1998/Jun/30
+#      allow Clustor job for 30 minutes at lunch time
+#on day Mon-Fri time 12:15-12:45
+#      allow Clustor jobs on Jan 1, 1998
+#on date 1998/1/1
+#      the computer must be free from interactive use for 30 minutes
+#idle 00:30:00
+#       turn on the screen saver option
+#screensaver on
+#       turn off the screen saver option
+#screensaver off
+#      to start new jobs, the load must be below 2.00
+#busyload 2.00
+#      to start new jobs, the CPU usage must be below 10%
+#busycpu 10
+#       to start new jobs, the Processor Queue Length must be 0
+#busyqueue 0
+#      to prevent new jobs, the program should return 1
+#external busy program "/home/myuser/myprogram" interval 00:01:00
+#      7.5Mb of temporary space must be available
+#tmpspace 7.5
+#      50Mb of working disk space must be available
+#diskspace 50
+#       8000Kb of main memory must be available to start a job
+#memory 8000
+#      on this node, run concurrently at most 3 jobs from a single
+application
+#joblimit 3
+#      be maximally nice
+#priorityoffset 20
+#      to stop existing jobs, the load must be above 10.00
+#stopload 10.00
+# to stop existing jobs, the CPU usage must be above 90%
+#stopcpu 90
+# to stop existing jobs, the Processor Queue Length must be above 3
+#stopqueue 3
+#      to stop existing jobs, the program should return 1
+#external stop program "/home/myuser/myprogram" interval 00:01:00
+#      wait 50 minutes before terminating jobs
+#stopaction suspend 00:50:00
+#      terminate jobs immediately
+#stopaction terminate
+#      use signal 3 (SIGQUIT) instead of SIGKILL
+#killsignal 3
+#      on this computer, run at most 5 concurrent Clustor jobs
+#totaljoblimit 5
+#      change default node directory
+#directory "/tmp/mynodes"
+#      monitor mouse usage on /dev/mouse
+#mouse "/dev/mouse"
+#      check console on /dev/console
+#console "/dev/console"
+
+
+
+
+
+2

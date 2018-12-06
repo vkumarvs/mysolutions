@@ -1,0 +1,118 @@
+A C++ Library for IBM MQSeries
+by Jack J. Woehr
+
+Listing One
+#include "jaxmq.hpp"
+using namespace SoftWoehr;
+// ...
+   /* A queue mgr to work with */
+   MQQueueManager mq_queue_manager;
+      /* Connect to our queue manager */
+      try {
+         mq_queue_manager.connect("MYQMGR");
+         }
+      /* Failed to open queue manager. */
+      catch (MQQueueManager::FailedToConnectException & ex) {
+         cout << "MQQueueManager::FailedToConnectException caught "
+              << "opening " << queue_manager_name
+              <<" ... Info follows:" << endl;
+         cout << ex.get_text() << endl;
+         cout << "Completion code : " << ex.get_completion_code() << endl;
+         cout << "Reason          : " << ex.get_reason()          << endl;
+         }
+      /* Failed to open queue manager. */
+      catch (MQException & ex) {
+         cout << "MQQueueManager::MQException caught "
+              << "opening " << queue_manager_name
+              <<" ... Info follows:" << endl;
+         cout << ex.get_text() << endl;
+         }
+      /* Announce success */
+      cout << "MQQueueManager "
+           << mq_queue_manager.get_name()
+           << " called MQCONN()."  << endl;
+      cout << "Handle is now      : "
+           << mq_queue_manager.get_connection_handle()  << endl;
+      cout << "Completion code is : "
+           << mq_queue_manager.get_completion_code()    << endl;
+      cout << "Reason is          : "
+           << mq_queue_manager.get_reason()             << endl;
+
+
+Listing Two
+/* Open a queue */
+try {
+   MQObject::Options options ( MQObject::Options::open_input_shared
+                             | MQObject::Options::open_output
+                             )
+                             ;
+   mq_queue.open( mq_queue_manager
+                , "APRICOT.QUEUE"
+                , options
+                )
+                ;
+   }
+
+catch (MQQueue::FailedToOpenException & ex) {
+   cout << "MQQueue::FailedToOpenException caught "
+        << "opening APRICOT.QUEUE"
+        << " ... Info follows:" << endl;
+   cout << ex.get_text() << endl;
+   }
+catch (MQException &ey) {
+   cout << "MQException caught "
+        << "opening APRICOT.QUEUE"e
+        << " ... Info follows:" << endl;
+   cout << ey.get_text() << endl;
+   }
+
+Listing Three
+ /* A message to put */
+#define SILLY_MSG "This is the way we wash our queues!"
+    MQMessage mq_message;
+    mq_message.set_message(SILLY_MSG, strlen(SILLY_MSG) +1);
+    try {
+       /** Put a message */
+       mq_queue.put(mq_message);
+       }
+    catch (MQObject::NotOpenedException & noex)
+      {
+      cout << "Exception caught putting message: " << noex.get_text() << endl;
+      }
+    catch (MQQueue::MessagePutException & mpex)
+      {
+      cout << "Exception caught putting message: " << mpex.get_text() << endl;
+      cout << "Condition code: " << mpex.get_completion_code() << endl;
+      cout << "Reason: "         << mpex.get_reason() << endl;
+      }
+
+Listing Four
+/* Empty message to receive incoming. */
+MQMessage mq_get_message;
+try {
+   /* The MQMessage can hold any practical length. Here's it just 
+    * arbitrarily 1000 bytes max for our silly message.
+    */
+   mq_queue.get(mq_get_message, 1000);
+   }
+catch (MQObject::NotOpenedException & nonoex)
+   {
+   cout << "Exception caught getting message: " << nonoex.get_text() << endl;
+   }
+catch (MQQueue::MessageGetException & mgex)
+   {
+   cout << "Exception caught getting message: " << mgex.get_text() << endl;
+   cout << "Condition code: " << mgex.get_completion_code() << endl;
+   cout << "Reason: "         << mgex.get_reason() << endl;
+   }
+/* Print out the returned message */
+cout << "Returned message == '"
+     << mq_get_message.get_message()
+     <<"'"
+     << endl;
+
+
+
+
+
+2

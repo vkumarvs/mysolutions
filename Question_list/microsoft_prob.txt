@@ -1,0 +1,90 @@
+Following were the questions which I faced in all 4 rounds:
+
+ 
+
+1. Clone singly linked list having next pointer field and random pointer fields.
+
+2. When while (1) { malloc(1024); } would terminate?
+
+3. Given windows path such as C:\A\B\..\..\p.txt, convert it to canonical form, i.e., C:\p.txt
+
+Follow up (after writing code): write test cases
+
+4. Why are you looking for change?
+
+5. What are you looking for in MS?
+
+6. Tell me about a project/problem you enjoyed most in your career so far?
+
+7. Design data structure that enables storing and fast searching of contacts in a mobile phone book. Also asked about test scenarios.
+
+8. Write power function: int pow(int a, int b)
+
+9. Have you used or know of any design patterns? then discussion went on singleton, asked about double checked locking pattern, how single checking introduces problem?
+
+10. How to check if a given singly linked list is palindromic, data is integer in each node.
+
+ 
+
+ 
+
+These are some of the questions asked in MS interviews and the questions are asked randomly. Kindly keep this discreet and do not share with anyone.
+
+ 
+
+ 
+
+Set 1:
+
+
+1. There is 2D linked list with each node have 2 pointers, next pointer and down pointer. Each row can have maximum 5 nodes. Down pointer of 1st node of each row points to 1st node of next row, whereas down pointer of other nodes of 1st row is null. Each row is sorted (increasing) and each row's last node is less than 1st node of next row.
+Write program to insert node into above such that given property is maintained. What is complexity?
+
+2. You are given 5p, 10p and 20p coins. Write code to print all ways in which these coins can make 1 rupee. Print in (a,b,c) format where a=#5p coins, b=#10p coins, c=#20p coins. What is complexity?
+
+3. In a room there are n people and one celebrity. Celebrity does know anyone in that room but everyone knows celebrity. We don't know about other people that who knows whom. You can ask any person whether he knows some other parson and he can answer yes or no only. Find out who is celebrity by asking minimum number of questions.
+
+4. How will you improve load time of website?
+
+Set 2:
+
+) Given an array of integers, you need to find all triplets a,b and c where a+b = c
+
+2) Find longest palindrome in a given string.
+
+3) Given an array which containg R,G,B. You need to sort it such that all Rs will come in the start then G and then B.
+
+4) Find Cycle in linked list.
+
+5) Find cycler in a directed graph
+
+Set 3:
+
+"1: write a program to compress a string with following logic...
+
+aaabbccc should be compressed with 3a2b3c.
+following discussion happen in this:
+if string is abcd compression will be 1a1b1c1d .. that is not a compression so we can implicitly ignore count=1
+aaabcc -> 3ab2c .... write code for this...
+
+
+do it in place..
+write test case for this..
+what problem can arise ? 1(when count's ascii code is same as some some character's code) 2(when count is more than 255) handle it....
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+2: given 2 string delete character in first string from second string.... do it in O(m+n) complexity...
+3: given 2 string whether they are anagram?
+4: given a string a file with set of string find all string which is anagram of first string...file is so large that it cannot be held in memory..
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+5: given a string find min number a character appended in the end so that it become a palindrome..
+6: Given a N-ary tree, return a array whose index i store number of node at level i.
+-------------------------------------------------------------------------------------
+7: swap a link-list pair wise... without swapping data...
+1 2 3 4 -> 2 1 4 3... if odd number of element ignore last one...I gave a recursive solution and then non-recursive as well..
+
+----------------------------------------------------------------
+8: given a 2d matrix of distinct no find a location which is max in row and min in its col... many optimizations can be done... can there a more that 1 such element..

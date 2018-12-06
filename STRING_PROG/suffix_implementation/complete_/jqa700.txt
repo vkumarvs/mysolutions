@@ -1,0 +1,110 @@
+
+Java Q&A
+by David Perelman-Hall
+
+Listing One
+// java.awt.event.TextListener interface implementation
+    /** Whenever the text value changes, let any registered
+     * FindEnabledListeners know.
+     */
+    public void textValueChanged(TextEvent event)
+    {
+        // Create a FindEnabledEvent with this as its source. Set the find 
+        // state equal to whether there is something to find or not and fire 
+        // the event off to all FindEnabledListeners.
+        FindEnabledEvent evt = new FindEnabledEvent(this);
+        String str = this.getText();
+        evt.setCanFind(str.length() > 0);
+        for(int i = 0; i < findEnabledListeners.size(); ++i)
+        {
+            FindEnabledListener listener = 
+                (FindEnabledListener)findEnabledListeners.elementAt(i);
+            listener.findChanged(evt);    
+        }
+    }
+
+
+Listing Two
+// Register this FindDialog to listen to result handler for enabling events.
+        if(findResult instanceof FindEnabler)
+            ((FindEnabler)findResult).addFindEnabledListener(this);
+        // Register this FindDialog to listen to the find prompt for
+        // enabling events.
+        if(findPrompt instanceof FindEnabler)
+            ((FindEnabler)findPrompt).addFindEnabledListener(this);
+
+
+Listing Three
+// Search the Searchable using the Transferable, and give search results to 
+//  the result handler.  Notify listeners. This is where search starts.
+        findBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt)
+            {
+                try {
+                    // Conduct the search
+                    ListIterator iter = searchable.search(findPrompt);
+                    findResult.setSearchResult(iter);
+                    // Notify listeners
+                    FindActionEvent event = 
+                           new FindActionEvent(FindDialog.this.findPrompt);
+                    for(int i = 0; i < findActionListeners.size(); ++i)
+                    {
+                      FindActionListener listener =
+                        (FindActionListener)findActionListeners.elementAt(i);
+                      listener.findPerformed(event);    
+                    }
+                } catch(UnsupportedFlavorException ex){
+                    System.out.println("Couldn't search " + searchable 
+                                       + " using " + findPrompt);
+                }
+            }
+        });
+
+
+Listing Four
+public void findPerformed(FindActionEvent event)
+    {
+        // Store off the String that I am searching for
+        try
+        {
+            FindPrompt prompt = (FindPrompt)event.getSource();
+            pattern = (String)prompt.getTransferData(DataFlavor.stringFlavor);
+        } 
+        catch(Exception ex)
+        {
+            // needs to handle cast, io, interrupted exceptions
+        }
+        if(resultIter.hasNext())
+        {
+            forward = true;
+            Integer integer = (Integer)resultIter.next();
+            this.select(integer.intValue(), integer.intValue() + 
+                                                         pattern.length());
+            hasPrevious = false;
+            hasNext = resultIter.hasNext();
+            this.enableInterface();
+            requestFocus();
+        }
+    }
+
+
+Listing Five
+protected void enableInterface()
+    {
+        // Send event to FindDialog
+        FindEnabledEvent event = new FindEnabledEvent(this);
+        event.setCanFindNext(hasNext);
+        event.setCanFindPrevious(hasPrevious);
+        for(int i = 0; i < findEnabledListeners.size(); ++i)
+        {
+            FindEnabledListener listener =
+                (FindEnabledListener)findEnabledListeners.elementAt(i);
+            listener.findChanged(event);    
+        }
+    }
+
+
+
+
+
+1

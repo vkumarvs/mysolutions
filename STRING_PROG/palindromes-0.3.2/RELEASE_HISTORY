@@ -1,0 +1,60 @@
+Release history:
+
+--------
+08072012 Version 0.3.2
+--------
+Only maximal palindromes are shown by the maximalEvenPalindromesLengthBetweenDNA
+function.
+
+--------
+03072012 Version 0.3.1
+--------
+Also showing length in DNA palindromes.
+
+--------
+01072012 Version 0.3
+--------
+Uses Data.Bytestring instead of String
+Includes functionality for determining palindromes in DNA
+Added many flags for determining the length of the palindromes returned
+
+--------
+19032012 Version 0.2.2.2
+--------
+Corrects a non-critical error in finalWordCentres
+
+--------
+19032012 Version 0.2.2.1
+--------
+Corrects a link
+
+--------
+17032012 Version 0.2.2
+--------
+Corrects the word palindromes solution
+
+--------
+26122011 Version 0.2.1
+--------
+Updates base dependency from <=4 to <5
+Uses latin1 character set for input files
+
+--------
+10012010 Version 0.2
+--------
+Reads from standard input, via the flag -i
+More flexible flag handling
+Reads multiple files
+Specifies minimum length of palindromes returned, via the flag -m int
+
+--------
+07092009 Version 0.1.1
+--------
+Corrects two errors in the flags
+
+--------
+06092009 Version 0.1
+--------
+First version of the package
+
+

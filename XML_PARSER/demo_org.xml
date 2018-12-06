@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+    <Configuration>
+        <Parameter ID="1" loadRate="1"/>
+        <Parameter ID="2" totalCall="10"/>
+        <Parameter ID="3" callHoldTime="100"/>
+        <Parameter ID="4" interfaceName="eth2"/>
+        <Parameter ID="5" startopc="120"/>
+        <Parameter ID="6" startdpc="130"/>
+        <Parameter ID="7" maxLoadPerThread="1000"/>
+        <Parameter ID="8" sleepTuning="20"/>
+    <MsgInfo>
+        <Parameter ID="1" msgType="SCCP_CR_INITIAL_UE_ATTACH"/>
+        <Parameter ID="2" msgBytes="002590398fe30025903993df0800450000d000004000ff840196a9fe120ba9fe130c10cc11303941a9a1ab17cb5a000300b03ad9ae7e000600000000000301000101000000a0020000080000000000060008000000010210008800000078000000820302010f01000000020206044382008e0f66001340620000070003400180000f400600010203000f00374001d4003a40080032f451000f87070010402b2a080102f5c0090803090932149500000010f032f4630024240b14d3822a80624cd1e081888fdc62707f00004f4003061a8000564005010203002d11010f00"/>
+        <Parameter ID="3" processing="YES" />
+    </MsgInfo>
+    </Configuration>

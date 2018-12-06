@@ -1,0 +1,232 @@
+Creating WAP Services
+by Luca Passani
+
+
+Listing One
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" 
+                             "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+ <template>
+  <do type="accept" label="Help">
+   <go href="index_help.wml"/> 
+  </do>
+ </template>
+ <card id="logo" title="WAP Radio" ontimer="#frontpage">
+  <timer value="30"/>
+  <p>
+   Welcome to
+   <img src="pix/radio.wbmp" alt="WAP Radio"/>
+  </p>
+ </card>
+ <card id="frontpage" title="WAP Radio">
+  <p>
+   <anchor>Pick up a song
+    <go href="#picksong" />
+   </anchor>
+   <anchor>Today's programs
+    <go href="programs.wml" />
+   </anchor>
+   <anchor>news
+    <go href="news.wml" />
+   </anchor>
+  </p>  
+ </card>
+  <card id="picksong" title="Pick up a song">
+  <do type="prev" label="Back">
+   <prev/>
+  </do>
+    <p> Artist or song title: <input type="text" name="searchkey" value="" />
+    <anchor title="search">Search
+            <go href="songlist.php3" method="get">
+         <postfield name="searchkey" value="$(searchkey)" />
+      </go>
+    </anchor>
+    </p>
+   </card>
+</wml>
+
+
+Listing Two
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN"
+                     "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+ <do type="prev" label="Back">
+  <prev/>
+ </do>
+</template>
+  <card id="index_hlp" title="help">
+   <p>  
+    This text is supposed to explain what happens in this deck. It should 
+tell users that they can browse the news, see today's programs on the radio, 
+and even pick up a song to be sent later on.
+ <br />
+Associating a  help deck to each deck that implements a certain
+function is an excellent way to provide context-sensitive help.
+ <br />
+ Generally speaking having a context-sensitive help system is a good idea in 
+the case of WAP services. Screens real estate is limited and the text used 
+to guide users can be cryptic.
+<br />
+Don't forget a back button
+   </p> 
+  </card>
+</wml>
+
+
+Listing Three
+<?php //header("content-type:application/xml"); 
+  header("content-type:text/vnd.wap.wml"); 
+  echo "<?xml version=\"1.0\" ?>\n";
+  echo '<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" ';
+  echo '"http://www.wapforum.org/DTD/wml_1.1.xml">'; 
+?> 
+<wml>
+<template>
+ <do type="prev" label="Back">
+  <prev/>
+ </do>
+</template>
+<?php
+ //there are several things that can go wrong
+ $ok = false;
+ if ($searchkey && strlen($searchkey) > 2) { //good start. 
+                                         // We have something to search for
+    mysql_connect("localhost:3306", "root", "");
+    $query = "SELECT * FROM songs " . 
+             "WHERE title LIKE '%$searchkey%' OR artist LIKE '$searchkey%'";
+    $result = mysql_db_query("wap", $query);
+ 
+    if ($result && mysql_numrows($result) > 0) {
+       $ok = true;
+    }
+ }
+ if ($ok) {
+    //if there are multiple hits, user should choose one
+    if (mysql_numrows($result) > 1) {
+?>
+ <card id="pickup" title="Choose from hitlist">
+  <do type="accept" label="Help">
+   <go href="songlist_help.wml"/> 
+  </do>
+  <p>
+Pick up song: 
+<select name='song'>
+<?php   
+  while ($r = mysql_fetch_array($result)) {
+    //echo("<option value='".$r["song_id"]."'>".$r["title"]." - 
+                                              ".$r["artist"]."</option>\n");
+    //display is too small. create entry for song and entry for artist
+    echo("<option value='".$r["song_id"]."'>".$r["artist"]."</option>\n");
+    echo("<option value='".$r["song_id"]."'>".$r["title"]."</option>\n");
+  } ?>
+</select>
+<?
+  } else { //only one hit, selected by default
+     echo("<card id=\"pickup\" title=\"Choose from hitlist\">\n");
+     $r = mysql_fetch_array($result);
+     //one way to do it is with setvar (as follows)--but consider 
+     //                                                   the side effects
+     //echo("<onevent type='onenterforward'>\n");
+     //echo("<refresh>\n");
+     //echo("<setvar name='song' value='".$r["song_id"]."' />\n");
+     //echo("</refresh>\n");
+     //echo("</onevent>\n");
+?>
+ <do type="accept" label="Help">
+   <go href="songlist_help.wml"/> 
+  </do>
+ <p>
+   you chose: <br />
+<?
+   echo($r["artist"].":".$r["title"]."<br />\n"); 
+  }
+?>
+your message:
+<input type="text" name="message" />
+<anchor title="next">Next
+  <go href="confirm.php3" method="get">
+<?
+   //if there are multiple entries, use the one selected
+   //by the user. Otherwise, use the only hit available
+   if (mysql_numrows($result) > 1) { 
+     echo("<postfield name=\"song\" value=\"$(song)\" />\n");
+   } else {
+     echo("<postfield name=\"song\" value=\"".$r["song_id"]."\" />\n");
+   }
+?>
+   <postfield name="message" value="$(message)" />
+ </go>
+</anchor>
+  </p>
+ </card>
+<?
+} else { //something went wrong, try again
+?>
+ <card id="sorry" title="No song found">
+  <do type="accept" label="Help">
+   <go href="songlist_help.wml"/> 
+  </do>
+ <p>No match. Try with a different search key:
+  <input type="text" name="searchkey" value="<?php echo($searchkey) ?>" />
+    <anchor title="search">Search
+            <go href="songlist.php3" method="get">
+         <postfield name="searchkey" value="$(searchkey)" />
+      </go>
+    </anchor>
+  </p>  
+ </card>
+<?php
+ }
+?>
+</wml>
+
+Listing Four
+<?php //header("content-type:application/xml"); 
+  header("content-type:text/vnd.wap.wml"); 
+  echo "<?xml version=\"1.0\" ?>\n";
+  echo '<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" ';
+  echo '"http://www.wapforum.org/DTD/wml_1.1.xml">'; 
+?>
+<wml>
+<template>
+ <do type="prev" label="Back">
+  <prev/>
+ </do>
+</template>
+<?
+  mysql_connect("localhost:3306", "root", "");
+  $query = "SELECT * FROM songs " . 
+             "WHERE song_id = $song";
+  $result = mysql_db_query("wap", $query);
+
+  //not much error handling for simplicity sake
+  $r = mysql_fetch_array($result);
+?>
+  <card id="confirm" title="Thank you!">
+   <p>  
+ You picked:<br/> <?php echo($r["title"]); ?> by 
+                                      <?php echo($r["artist"]); ?><br />
+ Your message:<br />
+ <?php echo($message); ?><br />
+<?
+  //let's insert the data in the playlist table
+  $query = "INSERT INTO playlist VALUES (NULL,".$r["song_id"].",
+                  \"".$r["title"]."\",\"".$r["artist"]."\",\"$message\")";
+  //echo("<!-- $query -->"); 
+  $result = mysql_db_query("wap", $query);
+?>
+ Thank you for listening to WAP Radio 105 FM.<br />
+<a href="index.wml">Go to front page</a>
+   </p> 
+  </card>
+</wml>
+
+
+
+
+
+
+4

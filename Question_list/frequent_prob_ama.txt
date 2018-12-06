@@ -1,0 +1,207 @@
+Study behavior of rand() function and its proper use.
+
+Some new DP problems
+********************
+11:00 Given N pair of parenthesis. Write an algorithm which would print out all possible permutations possible with those parenthesis given that parenthesis are in correct order (i.e. every open parenthesis is matched with closed parenthesis) 
+
+2. There are 2 arrays. First one has n elements all sorted. Second one has m elements sorted and then n free spaces at the end. Merge the first array into the second array so that after merge the 
+entire second array is sorted. 
+
+-- In array2 if the free space was in the beginning, can you solve this in O(n)?
+
+There is an array with only 0s and 1s. Rearrange these numbers in alternative sequence of 0s and 1s so that they follow Fibonacci sequence. If there are no more 0s or 1s to fill-up with fill up with the remaining element. The 0 and 1 count in the input and output must remain same. Explained with an example: Input : 000011110101 Output: 0100111000111 
+http://www.fq.math.ca/Scanned/26-3/turner2.pdf-- fibonacci binary patterns
+
+
+Q1) Given sorted array with integer and x, return min/max value of X 
+
+******************************************************************************
+Q2) Given array pick any n elements to maximize the sum with a condition that neighbors shouldn't be picked 
+#Given an array of numbers find maximum subset sum? What is the complexity.
+1)Given an integer set of numbers, print all the subsets -- very frequent
+#Find largest subsquence in array (in sequence solution o(n))
+10)Given an array, subarray size k and a number ssum, find the number of
+subarrays of size k that sum up to ssum  --- 6 time frequent
+1. sum the first k element from array.
+2. Start a loop from k+1 element to end.
+3. inside the loop, add current element to the current sum and subtract (current ptr - k)th value from the sum.
+4. Whenever sum is equal to ssum, keep that as result.
+
+***************************************************************************
+********************************************************************************
+2)Find intersection of two unsorted arrays" over the phone -- frequent
+#Given two lists, A and B, of sizes n and k, respectively, describe an algorithm
+to determine the intersection, C, of the two lists. What is the complexity of
+your algorithm? (The obvious solution is O(n*k)). Can you describe a solution
+that is faster? (An optimized solution can do it in O(n+k)).
+#Given two (huge) sets, what is an efficient way to find their intersection?
+*********************************************************************************
+
+*********************************************************************************
+3)How to find every word in one paragraph and return back the 10 most
+frequently words.
+Easy one again. Use a hashtable to store the words, after that, use a min heap of size 10 heap to
+return the 10 most
+#Return top 10 most used words in a string
+Use a queue with size 10.
+Then put every word into a hashmap and check its count. If it's the max count, put it into the queue. (If this word already exists in the queue, put it at the end of the queue).
+Finally return the 10 words inside the queue.
+#Find the top k repeated string in the list of string -- very frequent
+#Given a series of N strings, find a set of repeating string of size 3
+
+http://www.daniweb.com/software-development/cpp/threads/225240/display-only-the-20-most-used-wordsword-frequency#
+
+****Iterate over the character indexes of the string (0, 1, 2, ...) up to and
+including the index of the second-from-last character (i.e. up to strlen(str) -
+2). For each iteration, do the following...
+
+Extract the 2-char substring starting at the character index.
+
+Check whether your hashtable contains the 2-char substring. If it does, you've
+got your answer.
+
+Insert each 2-char substring into the hashtable.
+
+This is easily modifiable to cope with substrings of length k.
+
+#Given an infinite stream of numbers, find the top 50 integers. What's the data
+structure to use, and what's the time complexity.
+@birbal: First, you should let the min-heap fill completely and then you should compare every incoming number with the top element and insert that in the heap if it is greater than the least element. I have the working code with me...
+
+************************************************************************************
+****************************************************************************************
+4)How would you find a number which is repeated odd number of times in array of
+number where every other number is repeated even no of times.? --- telephonic very frequent
+#Given an array of integers, all but one of which appears an even number of
+times, find the one integer which appears an odd number of times
+#write code to identify the single element that occurs odd no of times in an
+array -- good frequency
+#iven a set of N numbers, assume that you have the set of numbers from 1 to N+1,
+with the exception of one number. How do you determine what number that is? What
+is the complexity of your solution?
+**********************************************************************************
+************************************************************************************
+5)Write a function with input a list of integers and output the starting index
+of the longest sequence of ascending numbers e.g. 12123 -> 2 or 4567 -> 0  
+#Length of longest repeating element in a sequence.
+#Find the longest subsequence in a given array of numbers in O(n) -- frequent
+************************************************************************************
+*********************************************************************************
+6)Given a random array with integers, find every pair that sum up to a certain
+number. -- very frequent
+#Given a value and an array of integers, find if there are two integers in the
+array that add up to the value -- very very frequent
+#find two numbers in a sequence that add to K
+#Find all non- duplicate pairs that sum to n.
+********************************************************************************
+
+****************************************************************************************
+7)Lowest common ancestor of two nodes in BST. --- very very frequent 
+trick: Other than lowest common ancestor all ancestor values will be either less
+of both node values or greater than both nodes values.
+          OR
+Given a binary tree with the usual left and right pointers on each
+node, and additionally a parent pointer, make an algorithm to discover
+the closest ancestor to 2 nodes on the tree
+***********************************************************************
+
+3)Write a program to check whether a binary tree is a binary search tree --- very high frequency 10 time
+Trick: if using BST property left <= current <= right is not enough in this case
+, whole left node values should be less than current and whole right values
+should be greater than current
+
+11)check if bst is mirror -- 5 times 
+
+8)level order print a tree using only one queue-- frequent 4 time
+
+8)Serialize (flatten) and de-serialize a binary tree. First describe the
+approach, then write the code or flattening a tree to a file  ---- 6 time
+#Serialize/Deserialize a binary tree. (Write a binary tree to file and
+reconstruct it by reading from the file)   
+
+Approach:
+Serializing and De-serializing Binary Tree
+Serializing a binary tree is easy. Only thing we need to do is to serialize null
+pointers as well. So a preorder traversal of the tree with a special symbol
+indicating null left or right child of the tree will be sufficient to
+reconstruct tree. Int the example code below we indicate null by ~0 (which is
+the number with all 1 binary digit. For example if you have a tree like A->B->C
+(where B is a right child of A and C is a right child of B), the serialization
+will produce A NULL B NULL C NULL NULL. During reconstruction you start from the
+first element and proceed creating left child until you hit NULL. After we hit
+NULL, we drop it and look for nother element. If another element is not NULL we
+create right child. The process is straight forward and can easily be understood
+from the code.
+
+******************************************************************************************
+9) Determine the length of the longest palindrom in a given string -- very very frequent expected in O(n) time
+#Implement function to check palindrome
+#Non concentric palindrome
+******************************************************************************************************
+
+14)Print all permutations of a given string -- was frequent in 2010 and 2011
+
+11)provide an algorithm for shortest prefix matching string -- frequent 
+
+12)How would you implement a priority queue. Code. frequent in 2010
+Explain time complexity in implementing a Priority Queue
+
+13)Create a Queue using two Stacks.  --- frequent 
+
+
+
+26)Spiral print a 2-D array -- multiple time
+
+28) pythagoran triplet from an array --- 3 time
+
+18)Implement atoi -- high frequency
+
+Write code to find the nth fibonacci number -- complexity . very high frequency
+#Do you know about the Fibonacci series? Write the recursive program for it.
+What is the complexity? Write the program for the iterative approach. What is
+the complexity?
+
+*****************
+DESIGN
+*****************
+15)Find the most common "3 page path" on a website given a large data log -- frequent very common
+
+6)How do you implement LRU cache --- multiple times (5)
+
+4)Design an elevator system. ---- 4 time
+
+2)Design a class for a zoo -- 3 time
+
+2)Design a parking lot --- 4 time
+
+
+27)Describe the class structure for a chess game. frequently asked
+
+15)How would create and describe a card game like poker using an Object Oriented
+Framework? -- or deck of cards -- very frequent
+***There are 13 different values of cards: Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+Jack, Queen, and King. Each of these appears in a deck 4 times: once each in
+Hearts, Spades, Clubs, and Diamonds. Jacks, Queens, and Kings have pictures of
+people in them, and thus are called face cards.
+
+In summary, a deck contains:
+4 of each card.
+13 of each suit.
+12 face cards (4 Jacks, 4 Queens, 4 Kings)
+
+
+9)Finding a path in a maze which is represented by a grid of characters.
+frequent problem 3 time
+
+13)Given a filled sudoku table, implement a function verifying if all filled
+numbers satisy all sudoku rules.  frequent-- 3 time
+
+********************* Some new problems**************8
+Question 2: Count number of lines, characters and words in a file (Given that we don’t have much access to flashy java methods like readline, String methods like indexOf etc.)
+Solution 2: The constraint given above simply means that one has to read character by character. I started with a basic program of reading character by character and passing that character to switch statement and doing some logic when ever i got ' ' , '\t', '\n','\r' . But the problem with this solution was that whenever i used to get some odd input like empty file, a file with just '\n' or a file with just a space then i used to patch my earlier solution. Then as i was giving solutions to problems i was asked if I could store some "state". I tokk that lead and provided another solution: -
+
+Store a "state" variable. i.e. when ever a NON- special character (i.e. character apart from ‘ ‘ , ‘\n’ , ‘\r’, ‘\t’ , EOF comes then make the state 0. Whenever a special character comes make state 1. So whenever we go from state 0 to 1. Increase word count. Whenever we get \n or EOF we increase line count. And each time we increase character count.
+After this solution no clarification was asked for.
+
+
+***

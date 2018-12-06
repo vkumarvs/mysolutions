@@ -1,0 +1,21 @@
+#define CURL_STATICLIB
+#include <curl/curl.h>
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main() {
+      string url = "http://www.google.com";
+      cout << "Retrieving " << url << endl;
+
+      // Our curl objects
+      CURL *curl;
+      CURLcode result;
+
+      // Create our curl handle  
+      curl = curl_easy_init();  
+
+    system("pause");
+
+    return 0;
+}

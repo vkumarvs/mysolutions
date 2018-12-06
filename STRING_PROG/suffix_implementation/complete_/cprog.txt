@@ -1,0 +1,28 @@
+C Programming
+by Al Stevens
+
+Example 1: 
+
+#include <iostream.h>
+int main()
+{
+    cout << "hello world";
+    return 0;
+}
+
+Example 2:
+
+#include <iostream>
+int main()
+{
+    std::cout << "hello world";
+    return 0;
+}
+
+
+Example 3: 
+
+gcc -Ic:\libstdc++\include\g++-v3 -Lc:\libstdc++\lib -fhonor-std -s -o hello.exe hello.cpp
+
+
+1

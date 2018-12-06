@@ -1,0 +1,142 @@
+Automatic Updates for Distributed Applications
+by Max I. Fomitchev
+
+Listing One
+CInternetSession* pInetSession = NULL;
+CFtpConnection* pFtpConnection = NULL;
+
+Listing Two
+// WinNetwork resource variable
+NETRESOURCE nr;
+
+Listing Three
+// Create INet session
+pInetSession = new CInternetSession(NULL, 1, PRE_CONFIG_INTERNET_ACCESS,
+                                     NULL, NULL, INTERNET_FLAG_DONT_CACHE);
+// Create FTP connection
+pFtpConnection = pInetSession->GetFtpConnection(FtpSite, UserName, Password);
+CFtpFileFind object is used for locating application files on remote FTP
+server:
+CFtpFileFind FF(pFtpConnection);
+
+// Find Setup.exe
+bSetup = FF.FindFile(RemoteSetup);
+
+// Make sure that either application EXE or Setup.exe exists
+if ( bSetup || FF.FindFile(RemoteExe) )
+{
+    // Open and read .INF file
+    CInternetFile* pFile = pFtpConnection->OpenFile(RemoteInf);
+    if ( pFile )
+    {
+        pFile->ReadString(Version);
+        delete pFile;
+    }
+}
+
+Listing Four
+nr.dwType = RESOURCETYPE_DISK;
+nr.lpLocalName = nr.lpProvider = NULL;
+nr.lpRemoteName = (LPSTR)(LPCSTR)Server;
+
+Listing Five
+if ( UserName != "" && ::WNetAddConnection2(&nr, Password, UserName, 0)
+    != NO_ERROR )
+    THROW(new CSysException());
+
+Listing Six
+// Get application executable version
+GetFileVersion(RemoteExe, Version);
+
+Listing Seven
+// Find Setup.exe
+bSetup = CFileFind().FindFile(RemoteSetup);
+
+Listing Eight
+// Get the version number from .INF file
+if ( bSetup )
+{
+    CStdioFile File;
+    // Open and read .INF file
+    if (  File.Open(RemoteInf, CFile::modeRead|CFile::typeText) )
+    {
+        CString SetupVersion;
+        File.ReadString(SetupVersion);
+        if ( SetupVersion > Version )
+        {
+        bSetup = TRUE;
+            Version = SetupVersion;
+        }
+    }
+}
+
+Listing Nine
+// Compare versions
+if ( Version > AppVersion )
+    if ( AfxMessageBox(IDS_UPDATE_PROCEED, MB_YESNO|MB_ICONQUESTION) ==
+IDYES )
+    {
+        ::SetStatus("Writing new executable to disk...");
+        ...
+
+Listing Ten
+if ( !::CopyFile(AppExe, AppOld, FALSE) )
+    THROW(new CSysException());
+
+Listing Eleven
+
+// Obtain process ID
+CString PID;
+PID.Format("%i", ::GetCurrentProcessId());
+
+Listing Twelve
+if ( bUseFTP )
+{
+    // Download and run Setup.exe
+    if ( bSetup )
+    if ( pFtpConnection->GetFile(RemoteSetup, SetupExe, FALSE) )
+   _execl(SetupExe, SetupExe, NULL);
+    else
+            THROW(new CSysException());
+    else
+        // Download new application executable
+        if ( pFtpConnection->GetFile(RemoteExe, AppNew, FALSE) )
+            _execl(UpdExe, UpdExe, AppNew, AppExe, PID, NULL);
+        else
+            THROW(new CSysException());
+}
+
+Listing Thirteen
+if ( bSetup )
+{
+// Run Setup.exe
+    _execl(RemoteSetup, RemoteSetup, NULL);
+    AfxMessageBox(IDS_SETUP_FAILED);
+}
+else
+{
+// Replacing application executable
+    _execl(UpdExe, UpdExe, RemoteExe, AppExe, PID, NULL);
+    AfxMessageBox(IDS_UPDATE_FAILED);
+}
+
+Listing Fourteen
+if ( !bSilent ) AfxMessageBox("Progam is up to date.");
+// Clean up
+if ( pFtpConnection != NULL )
+delete pFtpConnection;
+if ( pInetSession != NULL )
+    delete pInetSession;
+// Close network connection
+if ( !bUseFTP )
+    ::WNetCancelConnection2(Server, 0, FALSE);
+
+Listing Fifteen
+// Initialize AutomatedUpdate
+auInit("Helix", "UpdTest", m_hInstance, m_pMainWnd, "\\\\JMYCOMP\\UPDATES");
+// Check for update
+auCheck(TRUE);
+
+
+
+3

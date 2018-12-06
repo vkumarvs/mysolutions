@@ -1,0 +1,55 @@
+size of list is 4 
+putting word into map hello 
+putting word into map wound 
+putting word into map writing 
+putting word into map threeone 
+left string ----->h
+right string ---->ello
+left string ----->he
+right string ---->llo
+left string ----->hel
+right string ---->lo
+left string ----->hell
+right string ---->o
+left string ----->hello
+right string ---->
+left string ----->w
+right string ---->ound
+left string ----->wo
+right string ---->und
+left string ----->wou
+right string ---->nd
+left string ----->woun
+right string ---->d
+left string ----->wound
+right string ---->
+left string ----->w
+right string ---->riting
+left string ----->wr
+right string ---->iting
+left string ----->wri
+right string ---->ting
+left string ----->writ
+right string ---->ing
+left string ----->writi
+right string ---->ng
+left string ----->writin
+right string ---->g
+left string ----->writing
+right string ---->
+left string ----->t
+right string ---->hreeone
+left string ----->th
+right string ---->reeone
+left string ----->thr
+right string ---->eeone
+left string ----->thre
+right string ---->eone
+left string ----->three
+right string ---->one
+left string ----->threeo
+right string ---->ne
+left string ----->threeon
+right string ---->e
+left string ----->threeone
+right string ---->
