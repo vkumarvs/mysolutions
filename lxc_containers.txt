@@ -1,0 +1,15 @@
+#Root files for lxc containers: (You can directly manipulate content like shared folder)
+/var/lib/lxc/origin_nginx/rootfs
+
+#Stop LXC container
+ lxc-stop -n origin-nginx -k
+#Start LXC container
+ lxc-start -n origin-nginx -d
+#Delete LXC container
+lxc-destroy -n origin-nginx
+
+#Info
+lxc-info -n origin-nginx
+
+#attach
+lxc-attach -n lxc-minion1
