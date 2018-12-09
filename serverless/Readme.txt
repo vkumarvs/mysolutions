@@ -1,0 +1,27 @@
+https://serverless.com/framework/docs/providers/aws/guide/functions/
+
+#Simple IAM role template for lambda function
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:*",
+        "s3:*",
+        "logs:*",
+        "iam:*",
+        "apigateway:*",
+        "lambda:*",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "events:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
