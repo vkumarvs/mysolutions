@@ -1,0 +1,72 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: mytestProject # NOTE: update this with your service name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+#pythonRequirements:
+#    dockerizePip: true
+#What this does is tell the serverless-python-requirements plugin to compile the Python packages in a Docker container before bundling them in the zip archive to ensure they're compiled for 64-bit Linux. You'll also need to install Docker in order for this to work, but once done this plugin will handle the dependencies you define in your requirements.txt file automatically.
+
+#events:
+#- schedule: rate(10 minutes)  : Shedule execution of lambda function every 10
+#minutes
+
+plugins:
+  - serverless-pseudo-parameters
+  - serverless-s3-remover
+  - serverless-python-requirements
+
+custom:
+  remover:
+     buckets:
+       - dsti#{AWS::Region}#{AWS::AccountId}123
+  pythonRequirements:
+      slim: true
+      dockerizePip: true
+
+provider:
+  name: aws
+  runtime: python3.7
+  stage: dev
+  region:  eu-west-1
+  role: arn:aws:iam::814862337162:role/VipinLambdaRole
+  memorySize: 128
+  environment:
+    accountId: '#{AWS::AccountId}'
+    region: '#{AWS::Region}'
+    SLS_DEBUG: "*"
+
+
+functions:
+  init:
+    handler: handler.init
+    events:
+        #      - http:
+        # path: init
+        # method: post
+        # cors: true
+        - s3: dsti#{AWS::Region}#{AWS::AccountId}123
+  calculate:
+    handler: calculatetopic.factorial
+    events:
+      - sns: calculate-topic # created immediately
+        onError: arn:aws:sns:#{AWS::Region}:#{AWS::AccountId}:dlq-topic
+
+  error:
+    handler: calculatetopic.error
+    events:
+      - sns: dlq-topic # created immediately
