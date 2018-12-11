@@ -1,0 +1,2 @@
+#upload a file into S3 bucket
+aws s3 cp testfile.txt s3://vipindstifirebucket/testfile1.txt
