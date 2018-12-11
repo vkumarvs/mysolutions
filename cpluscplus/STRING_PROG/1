@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+using namespace std;
+
+int main()
+{
+   string orgStr = "aaabbbccccdd";
+   stringstream ss; //equivalanet to string buffer
+   
+   ss <<"my name"<<10<<11;
+   ss <<20<<31;
+   cout<<ss.str()<<endl;
+   string s1 = "vipin dahiya";
+   char p = 'A';
+   //s1.append(p);
+   s1+= p;
+   //s1+= itoa(10);
+   //s1+= to_string(10);
+   cout <<s1<<endl;
+   return 0;
+}

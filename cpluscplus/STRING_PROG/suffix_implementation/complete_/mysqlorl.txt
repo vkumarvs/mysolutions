@@ -1,0 +1,105 @@
+Database Engines: MySQL Versus Oracle
+by Tim Kientzle
+
+Listing One
+// A short JDBC example. This uses the 'gjt' MySQL driver, but you only need
+// to change the driver name in the call to 'Class.forName' and the 
+// corresponding connect string in 'DriverManager.getConnection'
+// to use another JDBC driver.
+//
+import java.sql.*;
+
+public
+class Test {
+    public static void main(String argv[]) {
+    System.out.println("Simple JDBC Test");
+    try {
+        Class.forName("org.gjt.mm.mysql.Driver").newInstance(); 
+    } catch (Exception E) {
+        System.err.println("Unable to load MySQL driver.");
+        E.printStackTrace();
+    }
+
+    try {
+        Connection connection 
+        = DriverManager.getConnection(
+            "jdbc:mysql://localhost/ddj_test",
+            "user","password");
+        // Select tkientzle's events from the shared calendar
+        String sql = "SELECT cal_date,cal_descr"
+                         + " FROM calendar "
+                         + " WHERE cal_owner=?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1,"tim");
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+        String date = resultSet.getString(1);
+        String descr = resultSet.getString(2);
+        System.out.println("Date: "+date+"  Event: "+descr);
+        }
+        
+        resultSet.close();
+        statement.close();
+        connection.close();
+    } catch (SQLException E) {
+        System.out.println("SQLException: " + E.getMessage());
+        System.out.println("SQLState:     " + E.getSQLState());
+        System.out.println("VendorError:  " + E.getErrorCode());
+    }
+    }
+}
+
+
+Listing Two
+#!/usr/bin/perl
+# A short Perl DBI example.  Just change the 'connect'
+# string to use a different back-end database.  (You'll
+# also need to ensure the corresponding DBD driver is
+# installed on your system.)
+#
+use DBI;
+$db = DBI->connect(
+     'DBI:mysql:database=ddj_test',
+     "user","password");
+# Select tkientzle's events from the shared calendar
+$sql = "SELECT cal_date,cal_descr FROM calendar WHERE cal_owner=?";
+my $statement = $db->prepare($sql);
+my $result = $statement->execute("tim");
+while(($date,$descr)=($statement->fetchrow_array)) {
+    print "Date: $date, Event: $descr\n";
+}
+
+Listing Three
+/* A short database access example using MySQL's C API. */
+#include <stdio.h>
+#include <mysql/mysql.h>
+
+main() {
+    MYSQL *db = mysql_init(NULL);
+    MYSQL_RES *result;
+    MYSQL_ROW row;
+
+    mysql_real_connect(db,"localhost",
+               "user","password",
+                       "ddj_test",0,NULL,0);
+
+    /* Select tkientzle's events from the shared calendar */
+    if(mysql_query(db,
+        "SELECT cal_date,cal_descr FROM calendar WHERE cal_owner='tkientzle'")
+       || !(result = mysql_use_result(db))) {
+    printf("Query failed: %s\n",mysql_error(db));
+    exit(1);
+    }
+
+    while(row = mysql_fetch_row(result)) {
+    printf("Date: %s  Event: %s\n",row[0],row[1]);
+    }
+    mysql_free_result(result);
+    mysql_close(db);
+}
+
+
+
+
+2

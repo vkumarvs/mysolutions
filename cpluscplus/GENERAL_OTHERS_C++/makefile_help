@@ -1,0 +1,7 @@
+#creating a .o
+g++ -g -c map.cpp
+
+#making static library
+ar rcs libmap.a  map.o
+
+

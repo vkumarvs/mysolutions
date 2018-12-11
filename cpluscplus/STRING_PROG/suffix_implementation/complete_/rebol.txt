@@ -1,0 +1,203 @@
+The REBOL Scripting Language 
+by Carl Sassenrath
+
+
+Example 1: 
+USAGE:
+     SWITCH value cases /default case
+DESCRIPTION:
+     Selects a choice and evaluates what follows it.
+     SWITCH is a function.
+ARGUMENTS:
+     value -- Value to search for. (Type: any)
+     cases -- Block of cases to search. (Type: block)
+REFINEMENTS:
+     /default
+         case -- Default case if no others are found. (Type: any)
+
+Example 2: 
+switch 20
+   ** Script Error: switch expected cases argument of type: block.
+   ** Where: switch 20
+
+Example 3: 
+Buy 10.5 gallons of gas at $1.42 each
+Sell 100 shares of "Acme" at $4.55 per share
+Display "river" image in center of screen
+Turn right 2 miles after "Perkins Road" exit
+
+Example 4: 
+Search for flight from SFO to JFK
+         prefer "American" or "United"
+         departs 1-June-2000
+         arrives before 10:30PM
+         priced less than $450
+
+or:
+
+Buy 1000 shares of "Acme" symbol ACME
+         at or below $4.60
+         expires on 6-June-2000
+         account #ACN-456-987
+         confirm with luke@rebol.com
+
+Listing One
+friends: [
+          "Bob"   24 bob@mob.dom
+          "Sally" 28 sal@bol.dom
+          "Julie" 30 jul@minespring.dom
+  ]
+  foreach [name age email] friends [
+          send email reform ["Hi" name "How's it going?"]
+  ]
+
+Listing Two
+friends: [
+        name "Bob" "Marker" age 24
+        name "Sally"
+                age 28
+                email sal@bol.dom
+                phone #777-555-1111
+        name "Julie" "Lober"
+                email jul@minespring.dom
+                site http://www.juliesite.dom
+                city "New York"
+]
+while [friends: find friends 'name] [
+        friends: next friends
+        print first friends
+]
+friends: head friends
+
+Listing Three
+while [friends: find friends email!] [
+        send first friends "Quick hello!"
+        friends: next friends
+]
+
+Listing Four
+friends: [
+        [name: "Bob Marker" age: 24]
+        [name: "Sally"
+                age: 28
+                email: sal@bol.dom
+                phone: #777-555-1111
+        ]
+        [name: "Julie Lober"
+                email: jul@minespring.dom
+                site: http://www.juliesite.dom
+                city: "New York"
+        ]
+]
+foreach person friends [
+        set [name age email phone site city] none
+        do person
+        print name
+]
+
+Listing Five
+view layout 640x480 [
+    backdrop %trees.jpg
+    title "Network Tester"
+    text {Test that your network configuration is working
+            by clicking on relevant buttons below.}
+    pad 20
+    text "Network Tests:" yellow
+    button "DNS"    [read dns://www.rebol.com]
+    button "Whois"  [read whois://rebol.com@rs.internic.net]
+    button "Finger" [read finger://luke@rebol.com]
+    button "Time"   [read daytime://10.5.5.2]
+    button "SMTP"   [send luke@rebol.com "Test"]
+    button "POP"    [read pop://user:pass@rebol.com]
+    button "HTTP"   [read http://www.rebol.com]
+]
+
+Listing Six
+append: func [
+        {Appends a value to the tail of a series.}
+        series [series! port!] {Series to append to}
+        value {Value to append}
+        /only {Appends a block value as a block}
+]
+
+Listing Seven
+trade: [
+        Sell 100 shares of "Acme" at $4.55 per share
+]
+stock-dialect: [
+        set action ['sell | 'buy]
+        set shares integer! 'shares 'of
+        set company string! 'at
+        set price money! 'per 'share
+]
+parse trade stock-dialect
+
+Listing Eight
+set action ['sell | 'buy]
+set shares integer! opt 'shares opt 'of
+set company string! 'at ['below | 'above | none]
+set price money! opt ['per 'share]
+
+Listing Nine
+Sell 100 shares of "Acme" at $4.55 per share
+Sell 100 shares "Acme" at $4.55 per share
+Sell 100 shares "Acme" at above $4.55 per share
+Sell 100 of "Acme" at $4.55 per share
+Sell 100 of "Acme" at below $4.55
+Sell 100 "Acme" at $4.55
+
+Listing Ten
+either parse trade stock-dialect [
+        print [action shares company price]
+][
+        print "stock trade error"
+]
+
+Listing Elven 
+REBOL [
+    Title: "Dr. Dobb's Example"
+    Date: "28-Mar-2000"
+    Version: 1.0.2
+    Needs: [core 2.3.0]
+]
+commands: [
+    manager is carl@rebol.com
+    access with ftp://user:pass@www.rebol.com/pages
+
+    inform "beginning update..."
+    download %index.html
+    download %sitemap.html to %oldsitemap.html
+
+    upload %new-index.html to %index.html
+    upload %logo.jpg
+    notify "home page has been updated"
+
+    quit
+]
+net-dialect: [
+    'manager opt 'is set who email!
+    'access opt 'with set site url!
+    some [
+        'download file-rule
+              (print ["Downloading:" src]
+              write/binary dest read/binary site/:src)
+        | 'upload file-rule
+              (print ["Uploading:" src]
+              write/binary site/:dest read/binary src)
+        | 'notify set message string! (send who message)
+        | 'inform set message string! (print message)
+        | 'quit (quit)
+        | here: (print ["Unknown:" mold here] halt)
+    ]
+]
+file-rule: [set src file! ['to set dest file! | none (dest: src)]]
+if error? try [parse commands net-dialect][
+    send who "Script failed"
+]
+halt
+
+
+
+
+
+3

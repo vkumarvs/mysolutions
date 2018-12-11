@@ -1,0 +1,44 @@
+    <?xml version="1.0" encoding="ISO-8859-1"?>
+     
+    <Configuration>
+        <Parameter name="01010101010101010100101100101010101010101" value="3"/>
+        <Parameter name="newparam" value="some value"/>
+        <Process Name="osis">
+            <App ID="1" Name="TATA ADC" LogPath="C:\Projects\TATA\TATA\TATA ADC\Test" SeparatorLine="======">
+                <LineFormat Separator="|">
+                    <LinePart>Timestamp</LinePart>
+                    <LinePart>InformationType</LinePart>
+                    <LinePart>Message</LinePart>
+                </LineFormat>
+                <Block StartKeyword="processing fail"/>
+                <Block StartKeyword="processing chain"/>
+                <MailRecipient>ABCD@ABC.com</MailRecipient>
+            </App>
+            <App ID="1" Name="TATA Loader" LogPath="C:\Projects\TATA\TATA\TATA Loader\Test" SeparatorLine="---------">
+                <LineFormat Separator="|">
+                    <LinePart>Timestamp</LinePart>
+                    <LinePart>InformationType</LinePart>
+                    <LinePart>Message</LinePart>
+                    <LinePart>Detail</LinePart>
+                    <LinePart>Location</LinePart>
+                </LineFormat>
+                <Block StartKeyword="processing"/>
+                <MailRecipient>ABCD@ABC.com</MailRecipient>
+                <Alert Level="error"/>
+            </App>
+        </Process>
+        <Process Name="Ation">
+            <App ID="1" Name="ADA" LogPath="C:\Progloc\ADA" SeparatorLine="">
+                <LineFormat Separator=" ">
+                    <LinePart>Timestamp</LinePart>
+                    <LinePart>Message</LinePart>
+                </LineFormat>
+                <Block StartKeyword="performing"/>
+                <MailRecipient>ABCD@ABC.com</MailRecipient>
+            </App>
+        </Process>
+        <MailServer>smtp.intra.ABC.com</MailServer>
+        <MailSender>ABCDE@ABC.com</MailSender>
+    </Configuration>
+
+

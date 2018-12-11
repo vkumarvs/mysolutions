@@ -1,0 +1,223 @@
+Load Balancing for UNIX and Win32 
+by Abdul Sakib Mondal
+
+
+Listing One
+if (appl_request.kind == GET_OPT_HOST) {
+poll_for_load (); /**** List of load-indices is updated****/
+if (local_host->avail&& ((local_host->load + 
+                                    SWAPLOAD (local_host)) < idle_host{
+/****local host idle, and hence job is run locally***/
+appl_reply.kind = APPLICATION_REPLY;
+        appl_reply.data_number = 1;
+        appl_reply.data_hostlist[0] = local_inaddr;
+        appl_reply.data_factor[0] = local_host->load + SWAPLOAD (local_host);
+        sendto (application, (char *) &appl_reply, sizeof (rpc_message), 0, 
+                                         (struct sockaddr *) &from, fromlen);
+    }
+else{
+        float temp_cmpl_time;
+        struct load_indices *begin_selected_host;
+        struct load_indices *selected_host = (load_indices *) 0;
+        int num_selected_host=0;
+        int netdelay=0;
+               
+        if (number_of_hosts >1){    
+            for (help = host_list, count = 0;
+              count < number_of_hosts;help =  help->next_host, count++){
+                if (memcmp (&help->host.sin_addr, &local_inaddr, 
+                                             sizeof(struct sockaddr_in)) != 0)
+                 break;
+            }
+/*get network response time*/
+netdelay=getNetDelay(help->host);
+        }
+        /***calculate lowest expected ready time*******/
+        for (help = host_list, count = 0, temp_cmpl_time = MAXLOAD; count < 
+                           number_of_hosts; help = help->next_host, count++) {
+            if (temp_cmpl_time >= (help->load + SWAPLOAD (help))/help->alpha 
+                        && help->avail && !help->is_dummy && !help->is_dead) {
+                temp_cmpl_time = (help->load + SWAPLOAD (help))/help->alpha;
+                selected_host = help;
+            }
+        }
+/* it is still wise to schedule job locally, as otherwise response will be 
+ * poor due to network traffick
+ */
+if (local_host->avail && ((local_host->load + SWAPLOAD 
+(local_host))/local_host->alpha < temp_cmpl_time+ WT_NET*netdelay)) {
+            appl_reply.kind = APPLICATION_REPLY;
+            appl_reply.data_number = 1;
+            appl_reply.data_hostlist[0] = local_inaddr;
+            appl_reply.data_factor[0] = local_host->load + 
+                                                 SWAPLOAD (local_host);
+            sendto (application, (char *) &appl_reply, sizeof (rpc_message), 
+                                       0, (struct sockaddr *) &from,fromlen);
+                continue; 
+        }
+{
+/**get hosts with expected ready time around  a small band***/
+int first_time=1;
+            begin_selected_host=NULL;
+            for (help = host_list, count = 0; count < number_of_hosts && 
+(memcmp(&help->host.sin_addr,&local_host->host.sin_addr,4)!=0); help = 
+                                                 help->next_host, count++) {
+if (temp_cmpl_time+netdelay >= (help->load + SWAPLOAD(help))/ 
+help->alpha && help->avail && !help->is_dummy && !help->is_dead) {
+                    num_selected_host++;
+                    if (first_time) {
+                        begin_selected_host=help;
+                        selected_host= help;
+                        first_time=0;
+                    }
+                    else{
+                        selected_host->next_selected=help;
+                        selected_host=selected_host->next_selected;
+                    }
+                }
+            }
+            if (selected_host!=NULL) selected_host->next_selected=NULL;
+            selected_host=begin_selected_host;
+        }
+        if (!selected_host) {
+            /****all hosts are highly loaded, hence schedule it locally****/
+appl_reply.kind = APPLICATION_REPLY;
+            appl_reply.data_number = 1;
+            appl_reply.data_hostlist[0] = local_inaddr;
+            appl_reply.data_factor[0] = local_host->load + 
+                                                  SWAPLOAD (local_host);
+            sendto (application, (char *) &appl_reply,
+                sizeof (rpc_message), 0, (struct sockaddr *) &from,fromlen);
+                    continue;           
+        }
+        {       
+            /********choose a random host from the above list*********/
+for (index = (rand () % num_selected_host); index > 0; index--){
+               selected_host = selected_host->next_selected;
+            }
+            if (selected_host->is_dead || selected_host->is_dummy || 
+                             !selected_host->avail || selected_host->load >= 
+                             (float) (1 - (float) (improvment / 100.0)) * 
+                             (local_host->load + SWAPLOAD (local_host))) {
+                for (count = 0 ; count < num_selected_host && 
+                           (selected_host->is_dead || selected_host->is_dummy
+                           || !selected_host->avail ||selected_host->load >=
+                           (float) (1 - (float) (improvment / 100.0)) * 
+                           (local_host->load + SWAPLOAD (local_host))); 
+                selected_host = selected_host->next_selected, count++){
+                }
+                if (count == num_selected_host) {
+/***local host NOT selected***/
+selected_host = local_host;
+                }
+else{
+/***local host NOT selected***/
+}
+}
+appl_reply.kind = APPLICATION_REPLY;
+appl_reply.data_number = 1;
+appl_reply.data_hostlist[0] = selected_host->host;
+appl_reply.data_factor[0] = selected_host->load + SWAPLOAD (selected_host);
+
+sendto (application, (char *) &appl_reply, sizeof (rpc_message), 
+                                    0, (struct sockaddr *) &from, fromlen);
+}
+} /*END OF GET_OPT_HOST*/
+    
+
+Listing Two
+int get_hosts (what, available_hosts)
+request *what;
+{
+rpc_message message;    /* Message to be sent to load-manager */
+int success;            /* Successful communication with load-manager*/
+fd_set readfds;         /* Read ... */
+int count;              /* Count ... */
+rpc_message answer;     /* Reply from load-manager */
+rpc_message message;    /* Message to be sent to load-manager */
+struct timeval timeout; /* Timeout-interval for requests 
+fd_set readfds;         /* Read ... */
+stats_timeout timeout_info;
+    /*do initialization, get option 'c'*/
+ ...
+switch( c ) {
+    ...
+    case 'h':
+        ... /*set host-list*/
+        specified_host = TRUE;
+        break;
+    case 'x':
+            lbstrat = TRUE;
+            break;
+    /*you can put option for your algorithm*/
+    ...
+}
+if( fastest_host ) {
+    want.kind = GET_FASTEST;
+}
+else if (lbstrat){
+    want.kind=GET_OPT;
+}
+/*modification you need to carry out
+else if (. . .){
+what->kind=GET_AS_U_LIKE;
+}*/
+else{
+        want.kind = GET_TOP; 
+}
+ ...
+/*you can put options for your algorithm, say, GET_AS_U_LIKE as below:-
+if (what->kind == GET_AS_U_LIKE){
+            message.kind = GET_AS_U_LIKE;
+            message.magic_number = MAGIC;
+            message.data_number = what->number;
+        }
+    else
+    ******/
+if (what->kind == GET_OPT){
+            message.kind = GET_OPT_HOST;
+            message.magic_number = MAGIC;
+            message.data_number = what->number;
+        }
+else if (what->kind == GET_TOP){
+            message.kind = APPLICATION_REQUEST;
+            message.magic_number = MAGIC;
+            message.data_number = what->number;
+        }
+ ...
+else{
+            return ILLEGAL_REQUEST;
+}
+ ...
+do{
+if (sendto (manager, (const void *)&message, sizeof (rpc_message), 0,
+         (struct sockaddr *) &name_of_manager, sizeof (struct sockaddr))< 0) {
+         return MANAGERNOTPRESENT;
+        }
+FD_ZERO (&readfds);
+            FD_SET (manager, &readfds);
+tmp=select (MAXWIDTH, &readfds, (fd_set *) 0, (fd_set *) 0,&timeout);
+            if (tmp<= 0) {
+            success = FALSE;/* failure in get_hosts due to timeout*/ 
+        }
+            else{
+           if (FD_ISSET (manager, &readfds)) {
+recv (manager, (char *) &answer, sizeof (rpc_message), 0);
+if (answer.magic_number == MAGIC) {
+                    if (answer.kind == APPLICATION_ERROR)
+                            return answer.data_error;
+                    if (answer.kind == APPLICATION_REPLY) {
+                            success = TRUE;/*Got a suitable host*/
+                            break;
+                        }
+                }
+                }
+        }
+            timeout_info.count++;
+}while (!success && (timeout_info.count <= ATTEMPTS));
+if (! success)   return MANAGERNOTPRESENT;
+*available_hosts = *(reply *) & answer.data.message;
+return 0;
+}
+
+4

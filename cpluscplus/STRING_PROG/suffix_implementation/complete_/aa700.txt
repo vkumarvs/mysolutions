@@ -1,0 +1,44 @@
+Algorithm Alley
+by Bogdan Dorohonceanu and Craig Nevill-Manning
+
+
+Listing One
+If the inserted suffix is the first suffix in the suffix array then
+    Create the root and add as child a node with a leaf.
+Else
+    Compute l = longest common prefix between the current suffix and 
+                 previous suffix in suffix array.
+    If l = 0
+        Add as child to root a node with a leaf.
+ Else
+    Let s = starting index of the inserted suffix. Follow each node 
+                n on the insertion path updating index(n) with s so that 
+                it points in the current inserted suffix and decreasing s 
+                and l with the value length(n), until (l == 0) or (l < 
+                length(node)). Then add a leaf to the node n if (l == 0) or 
+                split the node n (after splitting, the updated node n will 
+                have two children: 1) child(n) is a leaf or a node with a 
+                leaf and continues the new inserted path, and 2) 
+                sibling(child(n), which is a node with all the children 
+                of the split node).
+
+Listing Two
+Call: visit(child(root));
+void visit (int node) {
+   if(child(node > 0)) {
+     // inner node, process inner node here
+     for (int child = child(node);
+       child > 0; child = sibling(child)) {
+       visit(child);
+    }
+  }
+  else {
+    // leaf, process leaf here
+  }
+}
+
+
+
+
+
+1

@@ -1,0 +1,114 @@
+XML and Software Configuration
+by Tony Sintes
+
+Listing One
+<!ELEMENT DCML (
+    Name, 
+    ScreenName, 
+    ShortDescription, 
+    Object 
+)>
+<!ATTLIST DCML Type CDATA #REQUIRED>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT ScreenName (#PCDATA)>
+<!ELEMENT ShortDescription (#PCDATA)>
+<!ELEMENT Object (
+    Name, 
+    ScreenName, 
+    ShortDescription, 
+    ParameterGroups?, 
+    Behaviors?, 
+    SubObjects?
+)>
+<!ATTLIST Object Type CDATA "null">
+<!ELEMENT ParameterGroups (ParameterGroup)*>
+<!ELEMENT ParameterGroup (
+    Name, 
+    ScreenName, 
+    ShortDescription, 
+    Parameters
+)>
+<!ELEMENT Parameters (Parameter)*>
+<!ELEMENT Parameter (
+    Name, 
+    ScreenName, 
+    ShortDescription, 
+    Value
+)>
+
+<!-- Update this Entity |OR| list to add support for new types. -->
+<!ENTITY % ValueTypes "#PCDATA|Hosts">
+<!-- Definition for Hosts -->
+<!ELEMENT Hosts (Host)*>
+<!ELEMENT Host (IP, SubnetMask?)>
+<!ELEMENT IP (#PCDATA)>
+<!ELEMENT SubnetMask (#PCDATA)>
+<!ELEMENT Value (%ValueTypes;)*>
+<!ATTLIST Value DataType CDATA #REQUIRED>
+<!ELEMENT Behaviors (Behavior)*>
+<!ELEMENT Behavior (
+    Name, 
+    ScreenName, 
+    ShortDescription
+)>
+<!ELEMENT SubObjects (Object)*>
+
+
+Listing Two
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE DCML SYSTEM "dcml.dtd" >
+<DCML Type="Security">  
+  <Name>Security</Name>  
+  <ScreenName>Security Configuration</ScreenName>
+  <ShortDescription>This configuration deals with security issues.</ShortDescription>
+  <Object>
+    <Name>Security</Name>    
+    <ScreenName>Security</ScreenName>    
+    <ShortDescription>This is the security object.</ShortDescription>    
+    <SubObjects>
+      <Object>
+        <Name>Hosts</Name>        
+        <ScreenName>Hosts</ScreenName>
+        <ShortDescription>this configuration object lists allowed hosts</ShortDescription>        
+        <ParameterGroups>
+          <ParameterGroup>
+        <Name>HostList</Name>
+        <ScreenName>Allowed Hosts</ScreenName>            
+        <ShortDescription>this group lists all allowed hosts</ShortDescription>
+            <Parameters>
+          <Parameter>                
+            <Name>security.hosts.allowed</Name>                
+            <ScreenName>allowed hosts</ScreenName>                
+                <ShortDescripion>the allowed hosts</ShortDescription>                
+            <Value DataType="com.objectwave.hosts.HostList">                  
+              <Hosts>                    
+                <Host>                      
+              <IP>172.16.1.2</IP>                       
+              <SubnetMask>255.255.255.0</SubnetMask>
+                </Host>                    
+                <Host>                      
+              <IP>172.16.1.3</IP>
+                </Host>                    
+                <Host>                      
+              <IP>128.174.5.58</IP>
+              <SubnetMask>255.255.255.128</SubnetMask>
+                    </Host>                  
+                  </Hosts>
+                </Value>              
+          </Parameter>            
+            </Parameters>          
+          </ParameterGroup>        
+        </ParameterGroups>      
+      </Object>
+    </SubObjects>  
+  </Object>
+</DCML>
+
+
+
+
+
+
+
+
+2

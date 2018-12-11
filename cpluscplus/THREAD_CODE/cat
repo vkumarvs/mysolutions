@@ -1,0 +1,27 @@
+Host bastion-cdx
+  Hostname bastion01.sin1.unifieddeliverynetwork.net
+ 
+Host bastion-cdx-stag
+  Hostname bastion01.hkg1.cdx-stag.unifieddeliverynetwork.net
+ 
+Host bastion-cdx-test
+  Hostname bastion01.sin1.cdx-test.unifieddeliverynetwork.net
+ 
+Host bastion-cdx-dev
+  Hostname bastion01.sin1.cdx-dev.unifieddeliverynetwork.net
+ 
+# connect to all cdx-dev nodes via the bastion-cdx-dev host.
+Host !bastion* *.cdx-dev.unifieddeliverynetwork.net *.cdx-dev.udnapi.net
+  ProxyJump bastion-cdx-dev
+ 
+# connect to all cdx-test nodes via the bastion-cdx-test host.
+Host !bastion* *.cdx-test.unifieddeliverynetwork.net *.cdx-test.udnapi.net
+  ProxyJump bastion-cdx-test
+ 
+# connect to all cdx-stag nodes via the bastion-cdx-stag host.
+Host !bastion* *.cdx-stag.unifieddeliverynetwork.net *.cdx-stag.udnapi.net
+  ProxyJump bastion-cdx-stag
+ 
+# connect to all production nodes via the bastion-cdx host. Do not connect to non prod via prod bastion
+Host !bastion* !*.cdx*.unifieddeliverynetwork.net !review.unifieddeliverynetwork.net *.unifieddeliverynetwork.net *.udnapi.net
+  ProxyJump bastion-cdx

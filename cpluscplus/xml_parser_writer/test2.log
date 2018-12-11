@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Unified Streaming Platform(version=1.7.25) -->
+<MPD
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="urn:mpeg:dash:schema:mpd:2011"
+  xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd"
+  type="static"
+  mediaPresentationDuration="PT4M27.467467S"
+  maxSegmentDuration="PT1M"
+  minBufferTime="PT10S"
+  profiles="urn:mpeg:dash:profile:isoff-live:2011">
+  <Period
+    duration="PT4M27.467467S">
+    <BaseURL>dash/</BaseURL>
+    <AdaptationSet
+      group="3"
+      contentType="text"
+      lang="en"
+      minBandwidth="1000"
+      maxBandwidth="1000"
+      mimeType="application/mp4"
+      codecs="stpp">
+      <Role
+        schemeIdUri="urn:mpeg:dash:role:2011"
+        value="subtitle">
+      </Role>
+      <SegmentTemplate
+        timescale="1000"
+        initialization="manifest6-$RepresentationID$.dash"
+        media="manifest6-$RepresentationID$-$Time$.dash">
+        <SegmentTimeline>
+          <S t="0" d="60000" r="3" />
+          <S d="24600" />
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation
+        id="textstream_eng=1000"
+        bandwidth="1000">
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet
+      group="2"
+      contentType="video"
+      par="4:3"
+      minBandwidth="617000"
+      maxBandwidth="1690000"
+      minWidth="640"
+      maxWidth="960"
+      minHeight="480"
+      maxHeight="720"
+      segmentAlignment="true"
+      sar="3:4"
+      mimeType="video/mp4"
+      codecs="avc1.640028"
+      startWithSAP="1">
+      <SegmentTemplate
+        timescale="11988"
+        initialization="manifest6-$RepresentationID$.dash"
+        media="manifest6-$RepresentationID$-$Time$.dash">
+        <SegmentTimeline>
+          <S t="0" d="24000" r="132" />
+          <S d="14400" />
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation
+        id="video=617000"
+        bandwidth="617000"
+        width="640"
+        height="360"
+        scanType="progressive">
+      </Representation>
+      <Representation
+        id="video=919000"
+        bandwidth="919000"
+        width="768"
+        height="432"
+        scanType="progressive">
+      </Representation>
+      <Representation
+        id="video=1690000"
+        bandwidth="1690000"
+        width="960"
+        height="540"
+        scanType="progressive">
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>

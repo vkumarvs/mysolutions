@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Unified Streaming Platform(version=1.7.25) -->
+<smil xmlns="http://www.w3.org/2001/SMIL20/Language">
+  <head>
+    <meta name="clientManifestRelativePath" content="elephant.ismc" />
+    <meta name="creator" content="Unified Streaming Platform (USP)" />
+    <meta name="hds_client_manifest_version" content="2" />
+    <meta name="hls_client_manifest_version" content="4" />
+  </head>
+  <body>
+    <switch>
+      <audio src="elephant_eng-64k.isma" systemBitrate="64000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="audio_eng" valueType="data" />
+        <param name="SamplingRate" value="44100" valueType="data" />
+        <param name="Channels" value="2" valueType="data" />
+        <param name="BitsPerSample" value="16" valueType="data" />
+        <param name="PacketSize" value="4" valueType="data" />
+        <param name="AudioTag" value="255" valueType="data" />
+        <param name="FourCC" value="AACL" valueType="data" />
+        <param name="CodecPrivateData" value="1210" valueType="data" />
+      </audio>
+      <audio src="elephant_spa-64k.isma" systemBitrate="64000" systemLanguage="spa">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="audio_spa" valueType="data" />
+        <param name="SamplingRate" value="44100" valueType="data" />
+        <param name="Channels" value="2" valueType="data" />
+        <param name="BitsPerSample" value="16" valueType="data" />
+        <param name="PacketSize" value="4" valueType="data" />
+        <param name="AudioTag" value="255" valueType="data" />
+        <param name="FourCC" value="AACL" valueType="data" />
+        <param name="CodecPrivateData" value="1210" valueType="data" />
+      </audio>
+      <textstream src="elephant-en.ismt" systemBitrate="1000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="textstream_eng" valueType="data" />
+        <param name="FourCC" value="TTML" valueType="data" />
+        <param name="Subtype" value="CAPT" valueType="data" />
+        <param name="CodecPrivateData" value="" valueType="data" />
+      </textstream>
+      <textstream src="elephant-es.ismt" systemBitrate="1000" systemLanguage="spa">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="textstream_spa" valueType="data" />
+        <param name="FourCC" value="TTML" valueType="data" />
+        <param name="Subtype" value="CAPT" valueType="data" />
+        <param name="CodecPrivateData" value="" valueType="data" />
+      </textstream>
+      <video src="elephants380k.ismv" systemBitrate="354000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="video_eng" valueType="data" />
+        <param name="MaxWidth" value="384" valueType="data" />
+        <param name="MaxHeight" value="160" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C00DDB06056FFC0050006C40000003004000000C07C50AB80000000168CA8CB2" valueType="data" />
+      </video>
+      <video src="elephants578k.ismv" systemBitrate="551000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="video_eng" valueType="data" />
+        <param name="MaxWidth" value="544" valueType="data" />
+        <param name="MaxHeight" value="224" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C015DB0221DBFF007000991000000300100000030301F162EE0000000168CA8CB2" valueType="data" />
+      </video>
+      <video src="elephants879k.ismv" systemBitrate="807000" systemLanguage="eng">
+        <param name="trackID" value="1" valueType="data" />
+        <param name="trackName" value="video_eng" valueType="data" />
+        <param name="MaxWidth" value="736" valueType="data" />
+        <param name="MaxHeight" value="304" valueType="data" />
+        <param name="FourCC" value="AVC1" valueType="data" />
+        <param name="CodecPrivateData" value="000000016742C01EDB02E09EFFC0260033C4000003000400000300C07C58BB800000000168CA8CB2" valueType="data" />
+      </video>
+    </switch>
+  </body>
+</smil>

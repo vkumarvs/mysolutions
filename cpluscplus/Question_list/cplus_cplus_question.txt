@@ -1,0 +1,20 @@
+look explanation::a
+http://www.velocityreviews.com/forums/t268090-re-why-empty-class-size-is-1-byte.html
+
+class X
+{
+};
+
+class Y
+{
+int a;
+};
+
+int main()
+{
+std::cout << sizeof(X) << '\n';
+std::cout << sizeof(Y) << '\n';
+}
+
+produces an output of 1 and 4.
+
