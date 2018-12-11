@@ -1,5 +1,11 @@
 https://serverless.com/framework/docs/providers/aws/guide/functions/
 
+#Installing a plugin
+npm install serverless-python-requirements
+
+#Test your local function copy without deploying that
+sls invoke local --function calculate
+
 #When you have made code changes and you want to quickly upload your updated code to AWS Lambda or
 just change function configuration. the 
 serverless deploy function -f myFunction
