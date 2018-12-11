@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Unified Streaming Platform(version=1.6.6) -->
+<MPD
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="urn:mpeg:dash:schema:mpd:2011"
+  xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd"
+  type="static"
+  mediaPresentationDuration="PT2M0.020427S"
+  maxSegmentDuration="PT5S"
+  minBufferTime="PT10S"
+  profiles="urn:mpeg:dash:profile:isoff-live:2011,urn:com:dashif:dash264">
+  <Period start="PT0S" duration="PT1M0.895S">
+    <BaseURL>dash/</BaseURL>
+    <AdaptationSet
+      group="1"
+      mimeType="audio/mp4"
+      minBandwidth="65000"
+      maxBandwidth="65000"
+      segmentAlignment="true">
+      <SegmentTemplate
+        timescale="48000"
+        initialization="oceans-$RepresentationID$.dash"
+        media="oceans-$RepresentationID$-$Time$.dash"
+        startNumber="1">
+        <SegmentTimeline>
+          <S t="0" d="198657" />
+          <S d="115711" />
+          <S d="194561" />
+          <S d="156672" />
+          <S d="189439" />
+          <S d="142337" />
+          <S d="192511" />
+          <S d="199680" />
+          <S d="180224" />
+          <S d="146433" />
+          <S d="163839" />
+          <S d="200704" />
+          <S d="140288" />
+          <S d="130048" />
+          <S d="101376" />
+          <S d="148481" />
+          <S d="172032" />
+          <S d="148479" />
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation
+        id="audio=65000"
+        bandwidth="65000"
+        codecs="mp4a.40.2"
+        audioSamplingRate="48000">
+        <AudioChannelConfiguration
+          schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011"
+          value="2">
+        </AudioChannelConfiguration>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet
+      group="2"
+      mimeType="video/mp4"
+      par="19:8"
+      minBandwidth="236000"
+      maxBandwidth="2042000"
+      minWidth="304"
+      maxWidth="1264"
+      minHeight="128"
+      maxHeight="528"
+      segmentAlignment="true"
+      startWithSAP="1">
+      <SegmentTemplate
+        timescale="1000"
+        initialization="oceans-$RepresentationID$.dash"
+        media="oceans-$RepresentationID$-$Time$.dash"
+        startNumber="1">
+        <SegmentTimeline>
+          <S t="0" d="4171" />
+          <S d="2419" />
+          <S d="4046" />
+          <S d="3253" />
+          <S d="3963" />
+          <S d="2961" />
+          <S d="4004" />
+          <S d="4171" />
+          <S d="3754" />
+          <S d="3044" />
+          <S d="3420" />
+          <S d="4171" />
+          <S d="2920" />
+          <S d="2711" />
+          <S d="2127" />
+          <S d="3086" />
+          <S d="3587" />
+          <S d="3087" />
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation
+        id="video=236000"
+        bandwidth="236000"
+        codecs="avc1.42C00D"
+        width="304"
+        height="128">
+      </Representation>
+      <Representation
+        id="video=370000"
+        bandwidth="370000"
+        codecs="avc1.42C00D"
+        width="384"
+        height="160">
+      </Representation>
+      <Representation
+        id="video=878000"
+        bandwidth="878000"
+        codecs="avc1.42C01E"
+        width="736"
+        height="304">
+      </Representation>
+      <Representation
+        id="video=1340000"
+        bandwidth="1340000"
+        codecs="avc1.42C01E"
+        width="960"
+        height="400">
+      </Representation>
+      <Representation
+        id="video=2042000"
+        bandwidth="2042000"
+        codecs="avc1.42C01F"
+        width="1264"
+        height="528">
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet
+      group="2"
+      width="544"
+      height="224"
+      mimeType="video/mp4"
+      par="17:7"
+      minBandwidth="571000"
+      maxBandwidth="571000"
+      segmentAlignment="true"
+      startWithSAP="1">
+      <SegmentTemplate
+        timescale="1000"
+        initialization="oceans-$RepresentationID$.dash"
+        media="oceans-$RepresentationID$-$Time$.dash"
+        startNumber="1">
+        <SegmentTimeline>
+          <S t="0" d="4171" />
+          <S d="2419" />
+          <S d="4046" />
+          <S d="3253" />
+          <S d="3963" />
+          <S d="2961" />
+          <S d="4004" />
+          <S d="4171" />
+          <S d="3754" />
+          <S d="3044" />
+          <S d="3420" />
+          <S d="4171" />
+          <S d="2920" />
+          <S d="2711" />
+          <S d="2127" />
+          <S d="3086" />
+          <S d="3587" />
+          <S d="3087" />
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation
+        id="video=571000"
+        bandwidth="571000"
+        codecs="avc1.42C015">
+      </Representation>
+    </AdaptationSet>
+  </Period>
+
+  <Period start="PT0H2M0.00S">
+    <BaseURL>dash/</BaseURL>
+    <AdaptationSet
+      group="1"
+      mimeType="audio/mp4"
+      minBandwidth="65000"
+      maxBandwidth="65000"
+      segmentAlignment="true">
+      <SegmentTemplate
+        timescale="48000"
+        initialization="oceans-$RepresentationID$.dash"
+        media="oceans-$RepresentationID$-$Time$.dash"
+        startNumber="1">
+        <SegmentTimeline>
+          <S t="0" d="148479" />
+          <S d="102400" />
+          <S d="107520" />
+          <S d="172032" />
+          <S d="110592" />
+          <S d="125952" />
+          <S d="200705" />
+          <S d="197631" />
+          <S d="198657" />
+          <S d="186367" />
+          <S d="135168" />
+          <S d="122880" />
+          <S d="101376" />
+          <S d="104448" />
+          <S d="102401" />
+          <S d="103423" />
+          <S d="110592" />
+          <S d="132096" />
+          <S d="200705" />
+          <S d="189439" />
+          <S d="43008" />
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation
+        id="audio=65000"
+        bandwidth="65000"
+        codecs="mp4a.40.2"
+        audioSamplingRate="48000">
+        <AudioChannelConfiguration
+          schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011"
+          value="2">
+        </AudioChannelConfiguration>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet
+      group="2"
+      mimeType="video/mp4"
+      par="19:8"
+      minBandwidth="236000"
+      maxBandwidth="2042000"
+      minWidth="304"
+      maxWidth="1264"
+      minHeight="128"
+      maxHeight="528"
+      segmentAlignment="true"
+      startWithSAP="1">
+      <SegmentTemplate
+        timescale="1000"
+        initialization="oceans-$RepresentationID$.dash"
+        media="oceans-$RepresentationID$-$Time$.dash"
+        startNumber="1">
+        <SegmentTimeline>
+          <S t="0" d="3087" />
+          <S d="2127" />
+          <S d="2252" />
+          <S d="3587" />
+          <S d="2294" />
+          <S d="2628" />
+          <S d="4170" />
+          <S d="4129" />
+          <S d="4130" />
+          <S d="3878" />
+          <S d="2837" />
+          <S d="2544" />
+          <S d="2127" />
+          <S d="2169" />
+          <S d="2127" />
+          <S d="2169" />
+          <S d="2294" />
+          <S d="2752" />
+          <S d="4171" />
+          <S d="3963" />
+          <S d="875" />
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation
+        id="video=236000"
+        bandwidth="236000"
+        codecs="avc1.42C00D"
+        width="304"
+        height="128">
+      </Representation>
+      <Representation
+        id="video=370000"
+        bandwidth="370000"
+        codecs="avc1.42C00D"
+        width="384"
+        height="160">
+      </Representation>
+      <Representation
+        id="video=878000"
+        bandwidth="878000"
+        codecs="avc1.42C01E"
+        width="736"
+        height="304">
+      </Representation>
+      <Representation
+        id="video=1340000"
+        bandwidth="1340000"
+        codecs="avc1.42C01E"
+        width="960"
+        height="400">
+      </Representation>
+      <Representation
+        id="video=2042000"
+        bandwidth="2042000"
+        codecs="avc1.42C01F"
+        width="1264"
+        height="528">
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet
+      group="2"
+      width="544"
+      height="224"
+      mimeType="video/mp4"
+      par="17:7"
+      minBandwidth="571000"
+      maxBandwidth="571000"
+      segmentAlignment="true"
+      startWithSAP="1">
+      <SegmentTemplate
+        timescale="1000"
+        initialization="oceans-$RepresentationID$.dash"
+        media="oceans-$RepresentationID$-$Time$.dash"
+        startNumber="1">
+        <SegmentTimeline>
+          <S t="0" d="3087" />
+          <S d="2127" />
+          <S d="2252" />
+          <S d="3587" />
+          <S d="2294" />
+          <S d="2628" />
+          <S d="4170" />
+          <S d="4129" />
+          <S d="4130" />
+          <S d="3878" />
+          <S d="2837" />
+          <S d="2544" />
+          <S d="2127" />
+          <S d="2169" />
+          <S d="2127" />
+          <S d="2169" />
+          <S d="2294" />
+          <S d="2752" />
+          <S d="4171" />
+          <S d="3963" />
+          <S d="875" />
+        </SegmentTimeline>
+      </SegmentTemplate>
+      <Representation
+        id="video=571000"
+        bandwidth="571000"
+        codecs="avc1.42C015">
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>

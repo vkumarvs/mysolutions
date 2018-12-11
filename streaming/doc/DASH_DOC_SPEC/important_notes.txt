@@ -1,0 +1,12 @@
+http://dashif.org/white-papers/ ---- contains dash papers
+
+https://msdn.microsoft.com/en-in/library/ie/dn551370%28v=vs.85%29.aspx ---- MPEG-DASH and streaming reference and resources
+
+http://dashif.org/mpeg-dash/
+
+https://arashafiei.wordpress.com/2012/11/13/quick-dash/ ----> Good link to visualize MPEG file structure
+
+http://gpac.wp.mines-telecom.fr/home/about/ ---> Mp4Box tools to create and test DASH 
+
+
+https://github.com/Dash-Industry-Forum ----> Git hub dash industory forums

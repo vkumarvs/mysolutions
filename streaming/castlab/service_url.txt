@@ -1,0 +1,1 @@
+service=https://fe.staging.drmtoday.com/frontend/api/keys/v2/ingest/<>
