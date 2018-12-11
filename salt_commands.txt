@@ -1,0 +1,25 @@
+https://blog.talpor.com/2014/07/saltstack-beginners-tutorial/
+
+
+salt-key
+
+#enabling sudo permission:
+salt <machine id/ip> cmd.run 'echo "vkumar   ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers'
+
+Know the machines ids:
+salt-key -L | grep <machine-name-string>
+
+#Adding public key to a machine via salt master:
+
+sudo salt <machine name> state.apply packages.users pillar='{"users":{"vkumar":{"fullname":"Vipin Kumar","groups":'["wheel","vsadmin","adm"]',"pub_key":"<your key>"}}}' saltenv=dev
+
+#Running a command to remote machines:
+sudo salt -C '<machine name (regex too for example gtw0*)' cmd.run 'md5sum /srv/glusterfs/presentation/manifest.ism'
+
+#get the checksum of deployed video on machine
+sudo salt -C 'cluster machine name' cmd.run 'md5sum /srv/glusterfs/40172/iosabrtest2/HumApkeHaiKaun_384p__VOD/presentation/sources_var_mp4_HumApkeHaiKaun_384p_432_800k.mp4'
+
+#Example: Clear cache for a particular path:
+sudo salt 'large*' cmd.run "rm -rf /opt/cache/upload/.cache/content/file1*"
+
+#Salt can be used to deploy containers using grain files
