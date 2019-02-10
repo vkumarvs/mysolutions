@@ -70,8 +70,8 @@ int sequence()
                         end = i;
                 }
         }
-        printf("sequence maxsum %u start %Zu end %Zu\n", max_so_far, begin, end);
-        // return max_so_far 
+        printf("sequence maxsum %u start %zu end %zu\n", max_so_far, begin, end);
+        // return max_so_far
         return max_so_far ;
 }
 

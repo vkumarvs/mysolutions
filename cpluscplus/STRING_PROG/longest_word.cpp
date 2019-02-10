@@ -7,7 +7,7 @@ using namespace std;
 
 void getLongestWord(array<string, 4> &list)
 {
-    printf("size of list is %Zu \n", list.size());
+    printf("size of list is %zu \n", list.size());
     map <string, bool> hashMap ;
     map <string, bool>::iterator it1;
     map <string, bool>::iterator it;
@@ -37,10 +37,10 @@ void getLongestWord(array<string, 4> &list)
 int main ()
 {
   array <string, 4> _list;
-  _list.at(0) = "hello"; 
-  _list.at(1) = "wound"; 
-  _list.at(2) = "hellowound"; 
-  _list.at(3) = "threeone"; 
+  _list.at(0) = "hello";
+  _list.at(1) = "wound";
+  _list.at(2) = "hellowound";
+  _list.at(3) = "threeone";
 
    getLongestWord(_list);
   return 0;

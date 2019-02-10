@@ -33,7 +33,7 @@ plugins:
 custom:
   remover:
      buckets:
-       - dsti#{AWS::Region}#{AWS::AccountId}123
+       - dstivipindstiirelandbucket1
   pythonRequirements:
       slim: true
       dockerizePip: true
@@ -59,7 +59,7 @@ functions:
         # path: init
         # method: post
         # cors: true
-        - s3: dsti#{AWS::Region}#{AWS::AccountId}123
+        - s3: dstivipindstiirelandbucket1
   calculate:
     handler: calculatetopic.factorial
     events:
