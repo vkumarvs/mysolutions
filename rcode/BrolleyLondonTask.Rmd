@@ -1,0 +1,49 @@
+---
+title: "Brolley_Lon"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+rm(list=ls())
+dir_path<-list.dirs(path = "~/VIEW/R_STUDIO_MAC/Brolley_data", full.names = TRUE, recursive = TRUE)
+myDirFiles <- sort(dir_path)
+df <- tibble(year_month=0,bCInsurance=0)
+```
+
+```{r}
+pMonth = 0
+for (x in 2:length(myDirFiles)) {
+  #Extract the year and month from the path
+  val<-sapply(strsplit(myDirFiles[x], "/"), "[", 7)
+  #Read all monthly data from different locations
+  files <- dir(myDirFiles[x], pattern = "*.csv") # get file names
+  #Combine the monthly data into single frame
+  data <- files %>%
+  # read in all the files, appending the path before the filename
+    map(~ read_csv(file.path(myDirFiles[x],.))) %>% 
+    reduce(rbind)
+  #Convert the data into tibble
+  my_data <- as_tibble(data)
+  #Calculate number of Bicycle related crimes
+  crimes <-nrow(my_data %>% filter(my_data[10] == 'Bicycle theft'))
+  #Reduce number by one if current month data is half of previous month
+  if(crimes <= pMonth/2) {
+   crimes = crimes -1
+  }
+  pMonth = crimes
+  #Add a row for each month
+  df<-add_row(df, year_month=val[1], bCInsurance=crimes)
+}
+```
+
+```{r}
+#plot and save the month by month graph
+ggsave(filename = "~/VIEW/R_STUDIO_MAC/Brolley_data/brolley_insurance.jpg", ggplot(data=df, mapping = aes(x=year_month, y=bCInsurance)) + geom_bar(stat="identity",aes(color = year_month))  + theme_bw(base_size = 10),width = 5, height = 4, dpi = 600, units = "in", device='jpg')
+```
+
+```{r}
+```
+
+```{r}
+```
