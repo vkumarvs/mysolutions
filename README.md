@@ -4,6 +4,7 @@ mysolutions
 This repository is divided into many branches related to my learning path:
 I am a linux developer by core but have worked in windows and MAC environments
 too.
+a
 
 1.  Nginx
 2.  Useful bash scripts

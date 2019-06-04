@@ -1,3 +1,6 @@
+docker container run -d --name quotes alpine \
+   /bin/sh -c "while :; do wget -qO- https://talaikis.com/api/quotes/random; printf '\n'; sleep 5; done"
+
 #stop the container by name
 docker container stop quotes
 
@@ -21,6 +24,8 @@ docker container rm -f <container ID>
 
 #inspecting docker container
 docker container inspect <name>
+#Filter inspect output, show only State
+docker container inspect -f "{{json .State}}" quotes | jq
 
 #Attach to a running container 
 $ docker container attach <name> or <container ID>
@@ -38,6 +43,9 @@ Hello World
 
 #Run nginx on alpine linux distribution as daemon
 docker run -d --name nginx -p 8080:80 nginx:alpine
+#-d in daemon mode
+#--name : container name
+#-p: port
 
 #Collect stdout/stderr logs of a docker container
 docker container logs  <name or container ID>
